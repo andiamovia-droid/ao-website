@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A&O Bauunternehmen – Renovierung, Fassade, Pflaster, Fliesen</title>
+  <meta name="description" content="A&O Bauunternehmen – zuverlässig, sauber, termintreu. Renovierung, Fliesen, Malerarbeiten, Fassade, Pflaster, Baggerarbeiten, Kanalanschlüsse, Hausisolierung. Bad Kreuznach + Umgebung." />
+
+  <style>
+    :root{
+      --bg:#070a0f;
+      --card:#0d141f;
+      --card2:#0a101a;
+      --text:#eef3fb;
+      --muted:#b8c4d7;
+      --line:rgba(255,255,255,.10);
+      --gold:#d6b46a;
+      --gold2:#f2d990;
+      --ok:#25d366;
+      --radius:18px;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 18% 0%, rgba(214,180,106,.14), transparent 58%),
+        radial-gradient(900px 600px at 90% 20%, rgba(120,160,255,.12), transparent 60%),
+        radial-gradient(900px 600px at 50% 105%, rgba(37,211,102,.10), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .container{width:min(1100px, 92%); margin:0 auto}
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,15,.62);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; padding:12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none; min-width: 220px;
+    }
+    .brand img{height:34px; width:auto; display:block}
+    .brand b{letter-spacing:.3px}
+    .links{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    .links a{
+      text-decoration:none; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      border:1px solid transparent;
+      font-size:14px;
+    }
+    .links a:hover{
+      color:var(--text);
+      border-color:rgba(255,255,255,.16);
+      background:rgba(255,255,255,.04);
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(214,180,106,.45);
+      background: linear-gradient(135deg, rgba(214,180,106,.20), rgba(214,180,106,.06));
+      font-weight:800;
+      text-decoration:none;
+      box-shadow: 0 14px 35px rgba(214,180,106,.10);
+    }
+    .btn:hover{border-color: rgba(214,180,106,.75)}
+    .btn-ghost{
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow:none;
+    }
+
+    /* HERO */
+    .hero{padding:42px 0 20px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-left{padding:22px}
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size:13px; color:var(--muted);
+      border:1px solid rgba(255,255,255,.14);
+      padding:8px 10px; border-radius:999px;
+      background: rgba(255,255,255,.04);
+    }
+    .dot{width:8px; height:8px; border-radius:99px; background: var(--gold)}
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4.3vw, 44px);
+      line-height:1.06;
+    }
+    .sub{
+      margin:0 0 16px;
+      color:var(--muted);
+      font-size: 16px;
+      line-height:1.7;
+      max-width: 64ch;
+    }
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .badge{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:10px 12px;
+      border-radius: 14px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .hero-right{
+      position:relative;
+      min-height: 320px;
+      background:
+        linear-gradient(120deg, rgba(7,10,15,.70), rgba(7,10,15,.18)),
+        url("hero.jpg");
+      background-size: cover;
+      background-position: center;
+    }
+    .overlay{
+      position:absolute; left:14px; right:14px; bottom:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(13,20,31,.62);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding:14px;
+    }
+    .overlay b{display:block; margin-bottom:6px}
+    .overlay small{color:var(--muted); line-height:1.6}
+
+    /* Sections */
+    section{padding:26px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom:12px;
+    }
+    .section-title h2{margin:0; font-size:22px}
+    .section-title p{margin:0; color:var(--muted); font-size:14px}
+
+    .grid-3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    @media (max-width: 900px){ .grid-3{grid-template-columns:1fr} }
+
+    .box{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 14px 45px rgba(0,0,0,.25);
+    }
+    .box h3{margin:0 0 8px; font-size:16px}
+    .box p{margin:0; color:var(--muted); line-height:1.7; font-size:14px}
+
+    /* Services list */
+    .services{list-style:none; padding:0; margin:0}
+    .services li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+    }
+    .services li:last-child{border-bottom:none}
+    .tick{
+      width:22px; height:22px; border-radius:8px;
+      background: rgba(214,180,106,.18);
+      border:1px solid rgba(214,180,106,.32);
+      display:inline-flex; align-items:center; justify-content:center;
+      color: var(--gold2);
+      flex:0 0 auto;
+      margin-top:1px;
+    }
+
+    /* Gallery */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:12px;
+    }
+    @media (max-width: 900px){ .gallery{grid-template-columns:1fr} }
+    .shot{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      background: var(--card2);
+      cursor:pointer;
+      min-height: 220px;
+    }
+    .shot img{width:100%; height:100%; object-fit:cover; display:block}
+
+    /* Contact */
+    .contact-grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    @media (max-width: 900px){ .contact-grid{grid-template-columns:1fr} }
+
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline:none;
+    }
+    textarea{min-height:110px; resize:vertical}
+    label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+    .fine{color:var(--muted); font-size:12px; line-height:1.6}
+
+    /* WhatsApp floating */
+    .wa{
+      position:fixed; right:16px; bottom:16px; z-index:60;
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      padding:12px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(37,211,102,.22), rgba(37,211,102,.09));
+      border:1px solid rgba(37,211,102,.38);
+      box-shadow: 0 20px 55px rgba(0,0,0,.55);
+      font-weight:900;
+    }
+    .wa i{
+      width:34px; height:34px; border-radius:999px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(37,211,102,.20);
+      border:1px solid rgba(37,211,102,.38);
+    }
+
+    footer{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:18px 0 26px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    /* Lightbox */
+    .lb{
+      position:fixed; inset:0; z-index:999;
+      display:none; place-items:center;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      padding:18px;
+    }
+    .lb.show{display:grid}
+    .lb-inner{
+      width:min(980px, 96vw);
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 40px 120px rgba(0,0,0,.65);
+      background: rgba(10,16,26,.92);
+      position:relative;
+    }
+    .lb-inner img{width:100%; height:auto; display:block}
+    .lb-close{
+      position:absolute; top:10px; right:10px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.35);
+      color:var(--text);
+      border-radius: 12px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-weight:900;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- WhatsApp -->
+  <a class="wa" href="https://wa.me/4917684744452?text=Hallo%20A%26O%20Bauunternehmen%2C%20ich%20m%C3%B6chte%20ein%20kostenloses%20Angebot." target="_blank" rel="noopener">
+    <i>🟢</i> WhatsApp – Angebot
+  </a>
+
+  <!-- NAV -->
+  <div class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">
+        <img src="logo.png" alt="A&O Bauunternehmen Logo" />
+        <b>A&O Bauunternehmen</b>
+      </a>
+      <div class="links">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#ueberuns">Über uns</a>
+        <a href="#projekte">Projekte</a>
+        <a href="#kontakt" class="btn btn-ghost">Kontakt</a>
+        <a href="#angebot" class="btn">Kostenloses Angebot</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="container hero-grid">
+        <div class="card hero-left">
+          <div class="kicker"><span class="dot"></span> Seriös. Sauber. Termintreu. – Raum Bad Kreuznach + Umgebung</div>
+          <h1>Renovierung & Bauarbeiten, die <span style="color:var(--gold2)">edel</span> aussehen – und lange halten.</h1>
+          <p class="sub">
+            A&O Bauunternehmen steht für saubere Ausführung, klare Absprachen und ein Ergebnis, das hochwertig wirkt.
+            Von Fliesen & Malerarbeiten bis Fassade, Pflaster, Bagger & Anschlüsse – alles aus einer Hand.
+          </p>
+          <div class="hero-actions">
+            <a class="btn" href="#angebot">Angebot anfragen</a>
+            <a class="btn btn-ghost" href="#leistungen">Leistungen ansehen</a>
+          </div>
+          <div class="badges">
+            <div class="badge">✅ kostenlose Erstberatung</div>
+            <div class="badge">✅ transparent & fair</div>
+            <div class="badge">✅ schnelle Termine</div>
+            <div class="badge">✅ sauberer Premium-Finish</div>
+          </div>
+        </div>
+
+        <div class="card hero-right">
+          <div class="overlay">
+            <b>Ansprechpartner: Elvis Krasniqi</b>
+            <small>
+              E-Mail: ao.unternehmende@gmail.com<br>
+              Telefon: 0176 84744452<br>
+              Adresse: Kirchwinkel 7, 55545 Planig<br>
+              WhatsApp: Button unten rechts
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEISTUNGEN -->
+    <section id="leistungen" class="container">
+      <div class="section-title">
+        <h2>Leistungen</h2>
+        <p>Professionell, sauber & zuverlässig</p>
+      </div>
+
+      <div class="box">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+          <ul class="services">
+            <li><span class="tick">✓</span> Fliesenlegen (Bad, Küche, Boden)</li>
+            <li><span class="tick">✓</span> Malerarbeiten & Spachteln</li>
+            <li><span class="tick">✓</span> Renovierungen & Sanierungen</li>
+            <li><span class="tick">✓</span> Boden verlegen</li>
+          </ul>
+          <ul class="services">
+            <li><span class="tick">✓</span> Pflasterarbeiten & Terrassen</li>
+            <li><span class="tick">✓</span> Fassade / Außenarbeiten</li>
+            <li><span class="tick">✓</span> Baggerarbeiten</li>
+            <li><span class="tick">✓</span> Kanalanschlüsse & Hausisolierung</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÜBER UNS -->
+    <section id="ueberuns" class="container">
+      <div class="section-title">
+        <h2>Warum A&O?</h2>
+        <p>Klare Absprachen, saubere Arbeit</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="box">
+          <h3>Sauber & präzise</h3>
+          <p>Wir schützen deine Räume und liefern ein Finish, das hochwertig wirkt.</p>
+        </div>
+        <div class="box">
+          <h3>Transparent</h3>
+          <p>Du bekommst klare Schritte, realistische Zeiten und saubere Kommunikation.</p>
+        </div>
+        <div class="box">
+          <h3>Starkes Ergebnis</h3>
+          <p>Wir machen es nicht „irgendwie“, sondern so, dass du zufrieden bist.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJEKTE -->
+    <section id="projekte" class="container">
+      <div class="section-title">
+        <h2>Projekte</h2>
+        <p>Tippe auf ein Bild (groß ansehen)</p>
+      </div>
+
+      <div class="gallery">
+        <div class="shot" data-img="work1.jpg" title="Projekt 1">
+          <img src="work1.jpg" alt="Projekt 1">
+        </div>
+
+        <div style="display:grid; gap:12px">
+          <div class="shot" data-img="work2.jpg" title="Projekt 2">
+            <img src="work2.jpg" alt="Projekt 2">
+          </div>
+          <div class="shot" data-img="work3.jpg" title="Projekt 3">
+            <img src="work3.jpg" alt="Projekt 3">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(4,1fr); gap:12px; margin-top:12px">
+        <div class="shot" data-img="maler.jpg" title="Malerarbeiten"><img src="maler.jpg" alt="Malerarbeiten"></div>
+        <div class="shot" data-img="planung.jpg" title="Planung"><img src="planung.jpg" alt="Planung"></div>
+        <div class="shot" data-img="rohbau.jpg" title="Rohbau"><img src="rohbau.jpg" alt="Rohbau"></div>
+        <div class="shot" data-img="struktur.jpg" title="Struktur"><img src="struktur.jpg" alt="Struktur"></div>
+      </div>
+    </section>
+
+    <!-- KONTAKT / ANGEBOT -->
+    <section id="kontakt" class="container">
+      <div class="section-title">
+        <h2>Kontakt</h2>
+        <p>Schreib oder ruf an – wir antworten schnell</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="box">
+          <h3>Direktkontakt</h3>
+          <p style="color:var(--muted); line-height:1.9; margin:0">
+            <b style="color:var(--text)">Ansprechpartner:</b> Elvis Krasniqi<br>
+            <b style="color:var(--text)">E-Mail:</b> ao.unternehmende@gmail.com<br>
+            <b style="color:var(--text)">Telefon:</b> 0176 84744452<br>
+            <b style="color:var(--text)">Adresse:</b> Kirchwinkel 7, 55545 Planig<br>
+            <b style="color:var(--text)">WhatsApp:</b> <a href="https://wa.me/4917684744452" target="_blank" rel="noopener">Jetzt schreiben</a>
+          </p>
+
+          <div style="height:12px"></div>
+
+          <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12)">
+            <iframe
+              title="Google Maps A&O Bauunternehmen"
+              width="100%"
+              height="280"
+              style="border:0; display:block;"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Kirchwinkel%207%2C%2055545%20Planig&output=embed">
+            </iframe>
+          </div>
+
+          <p class="fine" style="margin:10px 0 0">Einsatzgebiet: Bad Kreuznach + Umgebung • Termine nach Absprache</p>
+        </div>
+
+        <div class="box" id="angebot">
+          <h3>Kostenloses Angebot anfragen</h3>
+          <p class="fine" style="margin-top:0">
+            Dieses Formular funktioniert auf Netlify (Forms).
+          </p>
+
+          <form name="angebot" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="angebot" />
+
+            <label>Name</label>
+            <input name="name" required placeholder="Dein Name" />
+
+            <label>Telefon oder WhatsApp</label>
+            <input name="phone" required placeholder="z.B. 0176..." />
+
+            <label>Was soll gemacht werden?</label>
+            <textarea name="message" required placeholder="Kurz beschreiben (z.B. Bad fliesen, Fassade, Pflaster...)"></textarea>
+
+            <button class="btn" type="submit">Anfrage senden</button>
+            <p class="fine" style="margin-top:10px">In Netlify findest du die Anfragen unter <b>Forms</b>.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPRESSUM / DATENSCHUTZ -->
+    <section class="container" id="impressum">
+      <div class="section-title">
+        <h2>Impressum</h2>
+        <p>Pflichtangaben</p>
+      </div>
+      <div class="box">
+        <p class="fine" style="margin:0">
+          <b>A&O Bauunternehmen</b><br>
+          Kirchwinkel 7, 55545 Planig<br><br>
+          <b>Vertreten durch:</b> Elvis Krasniqi<br>
+          <b>Kontakt:</b> 0176 84744452 • ao.unternehmende@gmail.com<br><br>
+          <b>Hinweis:</b> Wenn du später USt-ID / Unternehmensform hast, kannst du es hier ergänzen.
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      <footer>
+        © <span id="year"></span> A&O Bauunternehmen •
+        <a href="#impressum">Impressum</a>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lb" id="lb">
+    <div class="lb-inner">
+      <button class="lb-close" id="lbClose">✕</button>
+      <img id="lbImg" src="" alt="Bild groß">
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Lightbox
+    const lb = document.getElementById("lb");
+    const lbImg = document.getElementById("lbImg");
+    document.querySelectorAll(".shot").forEach(s=>{
+      s.addEventListener("click", ()=>{
+        lbImg.src = s.getAttribute("data-img");
+        lb.classList.add("show");
+      });
+    });
+    function closeLB(){ lb.classList.remove("show"); lbImg.src=""; }
+    document.getElementById("lbClose").addEventListener("click", closeLB);
+    lb.addEventListener("click", (e)=>{ if(e.target === lb) closeLB(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeLB(); });
+  </script>
+</body>
+</html>
