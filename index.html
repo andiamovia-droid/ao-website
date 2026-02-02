@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>A&O Bauunternehmen – Renovierung, Fassade, Pflaster, Fliesen</title>
+  <meta name="description" content="A&O Bauunternehmen – zuverlässig, sauber, termintreu. Renovierung, Fliesen, Malerarbeiten, Fassade, Pflaster, Baggerarbeiten, Kanalanschlüsse, Hausisolierung. Bad Kreuznach + Umgebung." />
+
+  <style>
+    :root{
+      --bg:#070a0f;
+      --panel:#0d141f;
+      --panel2:#0a101a;
+      --text:#eef3fb;
+      --muted:#b8c4d7;
+      --line:rgba(255,255,255,.10);
+
+      --gold:#d6b46a;
+      --gold2:#f2d990;
+
+      --ok:#25d366;
+      --shadow: 0 28px 70px rgba(0,0,0,.55);
+      --radius:18px;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      color:var(--text);
+      background:
+        radial-gradient(900px 600px at 18% 0%, rgba(214,180,106,.14), transparent 58%),
+        radial-gradient(900px 600px at 90% 20%, rgba(120,160,255,.12), transparent 60%),
+        radial-gradient(900px 600px at 50% 105%, rgba(37,211,102,.10), transparent 55%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit}
+    .container{width:min(1120px, 92%); margin:0 auto}
+
+    /* Scroll progress */
+    .progress{
+      position:fixed; inset:0 0 auto 0;
+      height:3px; z-index:9999;
+      pointer-events:none;
+    }
+    .progress > span{
+      display:block; height:100%;
+      width:0%;
+      background: linear-gradient(90deg, rgba(214,180,106,.85), rgba(242,217,144,.85));
+      box-shadow: 0 0 18px rgba(214,180,106,.55);
+      transform-origin:left;
+    }
+
+    /* NAV */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,10,15,.62);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 0;
+      gap:12px;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      min-width: 210px;
+    }
+    .brand img{
+      height:34px; width:auto; display:block;
+      filter: drop-shadow(0 12px 26px rgba(0,0,0,.55));
+    }
+    .brand b{letter-spacing:.3px}
+
+    .links{
+      display:flex; gap:10px; align-items:center;
+      flex-wrap:wrap; justify-content:flex-end;
+    }
+    .links a{
+      text-decoration:none; color:var(--muted);
+      padding:8px 10px; border-radius:12px;
+      transition: .18s var(--ease);
+      border:1px solid transparent;
+      font-size:14px;
+    }
+    .links a:hover{
+      color:var(--text);
+      border-color:rgba(255,255,255,.16);
+      background:rgba(255,255,255,.04);
+      transform: translateY(-1px);
+    }
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(214,180,106,.40);
+      background:
+        radial-gradient(140% 160% at 10% 10%, rgba(214,180,106,.30), rgba(214,180,106,.06)),
+        linear-gradient(135deg, rgba(214,180,106,.22), rgba(214,180,106,.08));
+      color:var(--text);
+      text-decoration:none;
+      box-shadow: 0 18px 40px rgba(214,180,106,.10);
+      transition:.18s var(--ease);
+      font-weight:800;
+      position:relative;
+      overflow:hidden;
+      isolation:isolate;
+    }
+    .btn::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(90px 90px at var(--mx,50%) var(--my,50%), rgba(242,217,144,.35), transparent 60%);
+      opacity:0;
+      transition:.18s var(--ease);
+      z-index:-1;
+    }
+    .btn:hover{transform: translateY(-1px); border-color: rgba(214,180,106,.65)}
+    .btn:hover::after{opacity:1}
+
+    .btn-ghost{
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow:none;
+      font-weight:800;
+    }
+    .btn-ghost:hover{border-color: rgba(255,255,255,.22)}
+
+    /* HERO */
+    .hero{position:relative; padding:56px 0 28px;}
+    .hero-bg{
+      position:absolute; inset:-140px -60px auto -60px;
+      height:520px;
+      pointer-events:none;
+      opacity:.9;
+    }
+    .orb{
+      position:absolute;
+      width: 320px; height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(242,217,144,.45), rgba(214,180,106,.10), transparent 62%);
+      filter: blur(1px);
+      animation: floaty 8s var(--ease) infinite;
+      box-shadow: 0 0 80px rgba(214,180,106,.18);
+    }
+    .orb.o1{left: 6%; top: 30px; animation-delay: -1s;}
+    .orb.o2{right: 8%; top: 120px; width:260px; height:260px; opacity:.75; animation-duration: 10s;}
+    .orb.o3{left: 42%; top: 190px; width:220px; height:220px; opacity:.55; animation-duration: 12s;}
+    @keyframes floaty{
+      0%,100%{transform: translateY(0) translateX(0) scale(1)}
+      50%{transform: translateY(-18px) translateX(10px) scale(1.03)}
+    }
+
+    .hero-grid{
+      position:relative;
+      display:grid;
+      grid-template-columns: 1.22fr .78fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 900px){ .hero-grid{grid-template-columns:1fr} }
+
+    .glass{
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .glass::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(120px 120px at 20% 20%, rgba(214,180,106,.14), transparent 60%),
+        radial-gradient(180px 180px at 80% 10%, rgba(120,160,255,.10), transparent 60%);
+      opacity:.9;
+      pointer-events:none;
+    }
+
+    .hero-left{padding:26px; isolation:isolate}
+
+    .kicker{
+      display:inline-flex; gap:10px; align-items:center;
+      font-size:13px; color:var(--muted);
+      border:1px solid rgba(255,255,255,.14);
+      padding:8px 10px; border-radius:999px;
+      background: rgba(255,255,255,.04);
+    }
+    .dot{width:8px; height:8px; border-radius:99px; background: var(--gold); box-shadow:0 0 18px rgba(214,180,106,.6)}
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(28px, 4.3vw, 46px);
+      line-height:1.06;
+      letter-spacing:.2px;
+    }
+    .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: 16px;
+      line-height:1.7;
+      max-width: 62ch;
+    }
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+    .badge{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      padding:10px 12px;
+      border-radius: 14px;
+      color:var(--muted);
+      font-size:13px;
+      transition: .18s var(--ease);
+    }
+    .badge:hover{transform: translateY(-2px); border-color: rgba(214,180,106,.25)}
+
+    /* HERO RIGHT with your image + cinematic zoom */
+    .hero-right{
+      position:relative;
+      min-height: 320px;
+      background:
+        linear-gradient(120deg, rgba(7,10,15,.68), rgba(7,10,15,.18)),
+        url("assets/neubau.jpg");
+      background-size: cover;
+      background-position: center;
+      transform: translateZ(0);
+      animation: heroZoom 14s var(--ease) infinite alternate;
+    }
+    @keyframes heroZoom{
+      0%{transform: scale(1); filter:saturate(1.05) contrast(1.05)}
+      100%{transform: scale(1.05); filter:saturate(1.18) contrast(1.10)}
+    }
+    .hero-right::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 400px at 20% 20%, rgba(214,180,106,.26), transparent 60%),
+        radial-gradient(700px 420px at 80% 70%, rgba(120,160,255,.16), transparent 60%);
+      pointer-events:none;
+      mix-blend-mode: screen;
+      opacity:.95;
+    }
+
+    .overlay{
+      position:absolute; left:16px; right:16px; bottom:16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(13,20,31,.62);
+      backdrop-filter: blur(14px);
+      border-radius: 18px;
+      padding:14px;
+    }
+    .overlay b{display:block; margin-bottom:6px}
+    .overlay small{color:var(--muted); line-height:1.5}
+
+    /* SECTIONS */
+    section{padding:30px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
+      margin-bottom:14px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+    .section-title p{margin:0; color:var(--muted); font-size:14px}
+
+    .grid-3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    @media (max-width: 900px){ .grid-3{grid-template-columns:1fr} }
+
+    .card{
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.26);
+      position:relative;
+      overflow:hidden;
+      transform: translateZ(0);
+    }
+    .card::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(180px 180px at var(--mx,50%) var(--my,50%), rgba(214,180,106,.18), transparent 60%);
+      opacity:0;
+      transition: .18s var(--ease);
+      pointer-events:none;
+    }
+    .card:hover::after{opacity:1}
+    .card:hover{border-color: rgba(214,180,106,.22)}
+
+    .card h3{margin:0 0 8px; font-size:16px}
+    .card p{margin:0; color:var(--muted); font-size:14px; line-height:1.7}
+
+    .services li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 0;
+      border-bottom:1px solid rgba(255,255,255,.06);
+      color:var(--muted);
+    }
+    .services li:last-child{border-bottom:none}
+    .tick{
+      width:22px; height:22px; border-radius:8px;
+      background: rgba(214,180,106,.18);
+      border:1px solid rgba(214,180,106,.32);
+      display:inline-flex; align-items:center; justify-content:center;
+      color: var(--gold2);
+      flex:0 0 auto;
+      margin-top:1px;
+      box-shadow: 0 0 18px rgba(214,180,106,.12);
+    }
+
+    /* Gallery + Lightbox */
+    .gallery{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:12px;
+    }
+    .shot{
+      position:relative;
+      border-radius: var(--radius);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow: var(--shadow);
+      background: var(--panel2);
+      cursor:pointer;
+      transform: translateZ(0);
+    }
+    .shot img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+      transition: .32s var(--ease);
+      filter:saturate(1.05) contrast(1.05);
+    }
+    .shot:hover img{transform: scale(1.08)}
+    .shot::after{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(600px 280px at 30% 20%, rgba(214,180,106,.22), transparent 55%),
+                  linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.35));
+      opacity:.85;
+      pointer-events:none;
+    }
+    @media (max-width: 900px){
+      .gallery{grid-template-columns:1fr}
+      .shot{min-height:220px}
+    }
+
+    /* Contact */
+    .contact-grid{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+    @media (max-width: 900px){ .contact-grid{grid-template-columns:1fr} }
+
+    .contact-line{color:var(--muted); font-size:14px; line-height:1.85}
+    .contact-line b{color:var(--text)}
+
+    input, textarea, select{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      outline:none;
+      transition: .18s var(--ease);
+    }
+    input:focus, textarea:focus, select:focus{
+      border-color: rgba(214,180,106,.45);
+      box-shadow: 0 0 0 6px rgba(214,180,106,.08);
+    }
+    textarea{min-height:110px; resize:vertical}
+    label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+    .fine{color:var(--muted); font-size:12px; line-height:1.6}
+
+    /* WhatsApp Floating */
+    .wa-float{
+      position:fixed; right:16px; bottom:16px; z-index:60;
+      display:flex; align-items:center; gap:10px;
+      text-decoration:none;
+      padding:12px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(37,211,102,.22), rgba(37,211,102,.09));
+      border:1px solid rgba(37,211,102,.38);
+      box-shadow: 0 20px 55px rgba(0,0,0,.55);
+      color: var(--text);
+      font-weight:900;
+      transition:.18s var(--ease);
+    }
+    .wa-float:hover{transform: translateY(-2px) scale(1.02)}
+    .wa-float span{font-size:14px}
+    .wa-ico{
+      width:34px; height:34px; border-radius: 999px;
+      display:inline-flex; align-items:center; justify-content:center;
+      background: rgba(37,211,102,.20);
+      border:1px solid rgba(37,211,102,.38);
+      box-shadow: 0 0 22px rgba(37,211,102,.18);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{transform: scale(1)}
+      50%{transform: scale(1.08)}
+    }
+
+    /* Reveal animation */
+    .reveal{opacity:0; transform: translateY(18px); transition: .75s var(--ease)}
+    .reveal.show{opacity:1; transform: translateY(0)}
+
+    /* Divider glow */
+    .divider{
+      height:1px;
+      background: linear-gradient(90deg, transparent, rgba(214,180,106,.35), rgba(120,160,255,.22), transparent);
+      margin: 18px 0;
+      border:0;
+    }
+
+    /* Reviews */
+    .stars{display:flex; gap:4px}
+    .star{opacity:.25}
+    .star.on{opacity:1; color: var(--gold2); text-shadow: 0 0 14px rgba(214,180,106,.25)}
+    .review{
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.02);
+      border-radius: 16px;
+      padding:12px;
+      margin-top:10px;
+    }
+    .review-head{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .review small{color:var(--muted)}
+
+    /* Footer */
+    footer{
+      border-top:1px solid rgba(255,255,255,.10);
+      padding:18px 0 26px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .anchor-pad{scroll-margin-top: 84px;}
+
+    /* Lightbox */
+    .lightbox{
+      position:fixed; inset:0; z-index:9998;
+      display:none;
+      place-items:center;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(10px);
+      padding:18px;
+    }
+    .lightbox.show{display:grid}
+    .lb-inner{
+      width:min(980px, 96vw);
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 40px 120px rgba(0,0,0,.65);
+      background: rgba(10,16,26,.92);
+      position:relative;
+    }
+    .lb-inner img{width:100%; height:auto; display:block}
+    .lb-close{
+      position:absolute; top:10px; right:10px;
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.35);
+      color:var(--text);
+      border-radius: 12px;
+      padding:10px 12px;
+      cursor:pointer;
+      font-weight:900;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="progress"><span id="bar"></span></div>
+
+  <!-- WhatsApp Floating Button -->
+  <a class="wa-float" href="https://wa.me/4917684744452?text=Hallo%20A%26O%20Bauunternehmen%2C%20ich%20m%C3%B6chte%20ein%20kostenloses%20Angebot." target="_blank" rel="noopener">
+    <span class="wa-ico">🟢</span>
+    <span>WhatsApp – Angebot</span>
+  </a>
+
+  <div class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">
+        <img src="assets/logo.png" alt="A&O Bauunternehmen Logo" />
+        <b>A&O Bauunternehmen</b>
+      </a>
+
+      <div class="links">
+        <a href="#leistungen" class="anchor-pad">Leistungen</a>
+        <a href="#ueberuns" class="anchor-pad">Über uns</a>
+        <a href="#projekte" class="anchor-pad">Projekte</a>
+        <a href="#bewertungen" class="anchor-pad">Bewertungen</a>
+        <a href="#kontakt" class="btn btn-ghost anchor-pad">Kontakt</a>
+        <a href="#angebot" class="btn anchor-pad">Kostenloses Angebot</a>
+      </div>
+    </div>
+  </div>
+
+  <main id="top">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-bg">
+        <div class="orb o1"></div>
+        <div class="orb o2"></div>
+        <div class="orb o3"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="glass hero-left reveal">
+          <div class="kicker"><span class="dot"></span> Seriös. Sauber. Termintreu. – Raum Bad Kreuznach + Umgebung</div>
+
+          <h1>
+            Renovierung & Bauarbeiten, die <span style="color:var(--gold2)">edel</span> aussehen – und lange halten.
+          </h1>
+
+          <p class="sub">
+            Wir machen keine halben Sachen. A&O Bauunternehmen steht für saubere Ausführung, klare Absprachen und ein Ergebnis,
+            das hochwertig wirkt. Von Fliesen & Malerarbeiten bis Fassade, Pflaster, Bagger & Anschlüsse – alles aus einer Hand.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn" href="#angebot">Angebot anfragen</a>
+            <a class="btn btn-ghost" href="#leistungen">Leistungen ansehen</a>
+          </div>
+
+          <div class="badges">
+            <div class="badge">✅ kostenlose Erstberatung</div>
+            <div class="badge">✅ transparent & fair</div>
+            <div class="badge">✅ schnelle Termine</div>
+            <div class="badge">✅ sauberer Premium-Finish</div>
+          </div>
+        </div>
+
+        <div class="glass hero-right reveal" id="heroMedia">
+          <div class="overlay">
+            <b>Ansprechpartner: Elvis Krasniqi</b>
+            <small>
+              E-Mail: ao.unternehmende@gmail.com<br>
+              Telefon: 0176 84744452<br>
+              Adresse: Kirchwinkel 7, 55545 Planig<br>
+              WhatsApp: direkt per Button unten rechts
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEISTUNGEN -->
+    <section id="leistungen" class="container anchor-pad">
+      <div class="section-title">
+        <h2>Leistungen</h2>
+        <p>Professionell, sauber & zuverlässig</p>
+      </div>
+
+      <div class="card reveal">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px">
+          <ul class="services" style="list-style:none; padding:0; margin:0">
+            <li><span class="tick">✓</span> Fliesenlegen (Bad, Küche, Boden)</li>
+            <li><span class="tick">✓</span> Malerarbeiten & Spachteln</li>
+            <li><span class="tick">✓</span> Renovierungen & Sanierungen</li>
+            <li><span class="tick">✓</span> Boden verlegen</li>
+          </ul>
+
+          <ul class="services" style="list-style:none; padding:0; margin:0">
+            <li><span class="tick">✓</span> Pflasterarbeiten & Terrassen</li>
+            <li><span class="tick">✓</span> Fassade / Außenarbeiten</li>
+            <li><span class="tick">✓</span> Baggerarbeiten</li>
+            <li><span class="tick">✓</span> Kanalanschlüsse & Hausisolierung</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÜBER UNS -->
+    <section id="ueberuns" class="container anchor-pad">
+      <div class="section-title">
+        <h2>Warum A&O?</h2>
+        <p>Luxus-Look ohne Stress</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card reveal">
+          <h3>Sauber & präzise</h3>
+          <p>Wir arbeiten ordentlich, schützen deine Räume und liefern ein Finish, das hochwertig wirkt.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Klare Absprachen</h3>
+          <p>Du bekommst klare Schritte, realistische Zeiten und transparente Kommunikation – ohne Überraschungen.</p>
+        </div>
+        <div class="card reveal">
+          <h3>Starkes Ergebnis</h3>
+          <p>Wir machen es nicht “irgendwie”, sondern so, dass du am Ende stolz drauf bist.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJEKTE / GALERIE -->
+    <section id="projekte" class="container anchor-pad">
+      <div class="section-title">
+        <h2>Projekte</h2>
+        <p>Tippe auf ein Bild (groß ansehen)</p>
+      </div>
+
+      <div class="gallery reveal">
+        <div class="shot" data-img="assets/innenausbau.jpg" title="Innenausbau">
+          <img src="assets/innenausbau.jpg" alt="Innenausbau">
+        </div>
+
+        <div style="display:grid; gap:12px">
+          <div class="shot" data-img="assets/renovierung.jpg" title="Renovierung">
+            <img src="assets/renovierung.jpg" alt="Renovierung">
+          </div>
+          <div class="shot" data-img="assets/holzarbeiten.jpg" title="Holzarbeiten">
+            <img src="assets/holzarbeiten.jpg" alt="Holzarbeiten">
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(3,1fr); gap:12px; margin-top:12px" class="reveal">
+        <div class="shot" data-img="assets/maler.jpg" title="Malerarbeiten"><img src="assets/maler.jpg" alt="Malerarbeiten"></div>
+        <div class="shot" data-img="assets/planung.jpg" title="Planung"><img src="assets/planung.jpg" alt="Planung"></div>
+        <div class="shot" data-img="assets/rohbau.jpg" title="Rohbau"><img src="assets/rohbau.jpg" alt="Rohbau"></div>
+      </div>
+    </section>
+
+    <!-- BEWERTUNGEN -->
+    <section id="bewertungen" class="container anchor-pad">
+      <div class="section-title">
+        <h2>Bewertungen</h2>
+        <p>Sterne & Kommentare</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card reveal">
+          <h3>Bewertung hinzufügen</h3>
+          <p class="fine">
+            Hinweis: Diese Bewertungen sind aktuell nur lokal im Browser gespeichert.
+            Wenn du willst, bauen wir später echte Google-Bewertungen ein.
+          </p>
+
+          <label>Dein Name</label>
+          <input id="revName" placeholder="z.B. Max M." />
+
+          <label>Sterne (1–5)</label>
+          <select id="revStars">
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+
+          <label>Kommentar</label>
+          <textarea id="revText" placeholder="Kurz schreiben, wie zufrieden du warst..."></textarea>
+
+          <div style="margin-top:10px; display:flex; gap:10px; flex-wrap:wrap">
+            <button class="btn" type="button" onclick="addReview()">Absenden</button>
+            <button class="btn btn-ghost" type="button" onclick="clearReviews()">Alle löschen</button>
+          </div>
+        </div>
+
+        <div class="card reveal">
+          <h3>Aktuelle Bewertungen</h3>
+          <div id="reviews"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT / ANGEBOT -->
+    <section id="kontakt" class="container anchor-pad">
+      <div class="section-title">
+        <h2>Kontakt</h2>
+        <p>Schreib oder ruf an – wir antworten schnell</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card reveal">
+          <h3>Direktkontakt</h3>
+          <div class="contact-line">
+            <b>Ansprechpartner:</b> Elvis Krasniqi<br>
+            <b>E-Mail:</b> ao.unternehmende@gmail.com<br>
+            <b>Telefon:</b> 0176 84744452<br>
+            <b>Adresse:</b> Kirchwinkel 7, 55545 Planig<br>
+            <b>WhatsApp:</b> <a href="https://wa.me/4917684744452" target="_blank" rel="noopener">Jetzt schreiben</a>
+          </div>
+
+          <hr class="divider">
+
+          <h3>Google Maps</h3>
+          <div style="border-radius:18px; overflow:hidden; border:1px solid rgba(255,255,255,.12); box-shadow: var(--shadow);">
+            <iframe
+              title="Google Maps A&O Bauunternehmen"
+              width="100%"
+              height="280"
+              style="border:0; display:block;"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Kirchwinkel%207%2C%2055545%20Planig&output=embed">
+            </iframe>
+          </div>
+
+          <p class="fine" style="margin-top:10px">
+            Einsatzgebiet: Bad Kreuznach + Umgebung • Termine: nach Absprache
+          </p>
+        </div>
+
+        <div class="card reveal" id="angebot">
+          <h3>Kostenloses Angebot anfragen</h3>
+
+          <!-- Netlify Form -->
+          <form name="angebot" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="angebot" />
+
+            <label>Name</label>
+            <input name="name" required placeholder="Dein Name" />
+
+            <label>Telefon oder WhatsApp</label>
+            <input name="phone" required placeholder="z.B. 0176..." />
+
+            <label>Was soll gemacht werden?</label>
+            <textarea name="message" required placeholder="Kurz beschreiben (z.B. Bad fliesen, Fassade, Pflaster...)"></textarea>
+
+            <button class="btn" type="submit">Anfrage senden</button>
+            <p class="fine" style="margin-top:10px">
+              In Netlify findest du die Anfragen unter <b>Forms</b>.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPRESSUM -->
+    <section id="impressum" class="container anchor-pad">
+      <div class="section-title">
+        <h2>Impressum</h2>
+        <p>Pflichtangaben</p>
+      </div>
+
+      <div class="card reveal">
+        <p class="fine">
+          <b>A&O Bauunternehmen</b><br>
+          Kirchwinkel 7<br>
+          55545 Planig<br><br>
+
+          <b>Vertreten durch:</b> Elvis Krasniqi<br>
+          <b>Kontakt:</b> 0176 84744452 • ao.unternehmende@gmail.com<br><br>
+
+          <b>Hinweis:</b> Wenn du eine offizielle Unternehmensform / USt-ID / Registereintrag hast, trag das hier ein.
+          (Wenn nicht, lass es weg.)
+        </p>
+      </div>
+    </section>
+
+    <!-- DATENSCHUTZ -->
+    <section id="datenschutz" class="container anchor-pad">
+      <div class="section-title">
+        <h2>Datenschutz</h2>
+        <p>Kurze Vorlage (bitte später final prüfen)</p>
+      </div>
+
+      <div class="card reveal">
+        <p class="fine">
+          <b>1. Verantwortlicher</b><br>
+          A&O Bauunternehmen, Kirchwinkel 7, 55545 Planig • E-Mail: ao.unternehmende@gmail.com<br><br>
+
+          <b>2. Hosting</b><br>
+          Diese Website wird über Netlify gehostet. Beim Aufruf können technisch notwendige Daten (z.B. IP-Adresse, Datum/Uhrzeit, Browser)
+          verarbeitet werden, um die Website bereitzustellen.<br><br>
+
+          <b>3. Kontaktaufnahme</b><br>
+          Wenn du uns per Formular, E-Mail oder WhatsApp kontaktierst, verarbeiten wir deine Angaben zur Bearbeitung der Anfrage.<br><br>
+
+          <b>4. Formulare</b><br>
+          Die Formulare (“Angebot”) werden über Netlify verarbeitet. Die Daten werden nur zur Bearbeitung gespeichert.<br><br>
+
+          <b>5. Google Maps</b><br>
+          Auf dieser Seite ist Google Maps per iFrame eingebunden. Beim Laden kann Google Daten verarbeiten.
+          Wenn du das strenger willst, bauen wir eine “Karte erst nach Klick laden” Lösung ein.<br><br>
+
+          <b>6. Deine Rechte</b><br>
+          Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung und Widerspruch.
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      <footer>
+        © <span id="year"></span> A&O Bauunternehmen •
+        <a href="#impressum">Impressum</a> •
+        <a href="#datenschutz">Datenschutz</a>
+      </footer>
+    </div>
+  </main>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lb">
+    <div class="lb-inner">
+      <button class="lb-close" id="lbClose">✕</button>
+      <img id="lbImg" src="" alt="Bild groß">
+    </div>
+  </div>
+
+  <script>
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Button / Card glow mouse position
+    function setMXMY(el, e){
+      const r = el.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width) * 100;
+      const y = ((e.clientY - r.top) / r.height) * 100;
+      el.style.setProperty("--mx", x + "%");
+      el.style.setProperty("--my", y + "%");
+    }
+    document.querySelectorAll(".btn, .card").forEach(el=>{
+      el.addEventListener("pointermove", (e)=>setMXMY(el,e));
+    });
+
+    // Scroll progress
+    const bar = document.getElementById("bar");
+    window.addEventListener("scroll", ()=>{
+      const h = document.documentElement;
+      const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      bar.style.width = p + "%";
+    }, {passive:true});
+
+    // Reveal on scroll
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("show");
+      });
+    }, {threshold: 0.14});
+    els.forEach(el=>io.observe(el));
+
+    // Parallax-ish hero background (subtle)
+    const hero = document.getElementById("heroMedia");
+    window.addEventListener("scroll", ()=>{
+      const y = window.scrollY || 0;
+      const t = Math.min(24, y * 0.04);
+      if(hero) hero.style.backgroundPosition = `center calc(50% + ${t}px)`;
+    }, {passive:true});
+
+    // Reviews (local only)
+    const KEY="ao_reviews_v2";
+    function renderReviews(){
+      const wrap = document.getElementById("reviews");
+      const data = JSON.parse(localStorage.getItem(KEY) || "[]");
+      if(!data.length){
+        wrap.innerHTML = '<p class="fine">Noch keine Bewertungen. Sei die erste Bewertung 🙂</p>';
+        return;
+      }
+      wrap.innerHTML = data.map(r=>{
+        const stars = Array.from({length:5}, (_,i)=> i < r.stars ? "on" : "");
+        return `
+          <div class="review">
+            <div class="review-head">
+              <b>${escapeHtml(r.name)}</b>
+              <div class="stars">
+                ${stars.map(s=>`<span class="star ${s}">★</span>`).join("")}
+              </div>
+            </div>
+            <small>${new Date(r.time).toLocaleString("de-DE")}</small>
+            <p style="margin:10px 0 0; color:var(--muted); line-height:1.7">${escapeHtml(r.text)}</p>
+          </div>
+        `;
+      }).join("");
+    }
+    function addReview(){
+      const name = document.getElementById("revName").value.trim() || "Anonym";
+      const stars = parseInt(document.getElementById("revStars").value,10);
+      const text = document.getElementById("revText").value.trim();
+      if(!text){ alert("Bitte Kommentar schreiben."); return; }
+      const data = JSON.parse(localStorage.getItem(KEY) || "[]");
+      data.unshift({name, stars, text, time: Date.now()});
+      localStorage.setItem(KEY, JSON.stringify(data));
+      document.getElementById("revText").value = "";
+      renderReviews();
+    }
+    function clearReviews(){
+      localStorage.removeItem(KEY);
+      renderReviews();
+    }
+    function escapeHtml(s){
+      return s.replace(/[&<>"']/g, (c)=>({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[c]));
+    }
+    renderReviews();
+
+    // Lightbox
+    const lb = document.getElementById("lb");
+    const lbImg = document.getElementById("lbImg");
+    const lbClose = document.getElementById("lbClose");
+    document.querySelectorAll(".shot").forEach(s=>{
+      s.addEventListener("click", ()=>{
+        lbImg.src = s.getAttribute("data-img");
+        lb.classList.add("show");
+      });
+    });
+    function closeLB(){ lb.classList.remove("show"); lbImg.src=""; }
+    lbClose.addEventListener("click", closeLB);
+    lb.addEventListener("click", (e)=>{ if(e.target === lb) closeLB(); });
+    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeLB(); });
+  </script>
+</body>
+</html>
