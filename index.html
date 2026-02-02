@@ -3,441 +3,726 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>A&O Bauunternehmen – Renovierung, Ausbau, Außenarbeiten</title>
-  <meta name="description" content="A&O Bauunternehmen – zuverlässig, sauber, termintreu. Renovierung, Ausbau, Fliesen, Maler, Fassade, Pflaster, Baggerarbeiten. Deutschlandweit nach Absprache." />
+  <title>A&O Bauunternehmen – Renovierung, Ausbau & Außenarbeiten</title>
+  <meta name="description" content="A&O Bauunternehmen – zuverlässig, sauber, termintreu. Renovierung, Ausbau, Fliesen, Malerarbeiten, Fassade, Pflaster, Baggerarbeiten. Deutschlandweit nach Absprache." />
 
   <style>
     :root{
-      --bg:#e9edf2;            /* leicht grau */
-      --card:#f7f8fa;
-      --text:#0f172a;
-      --muted:#475569;
-      --line:rgba(15,23,42,.10);
-      --shadow:0 18px 55px rgba(15,23,42,.10);
-      --radius:22px;
+      --bg: #e6eaee;          /* bisschen grauer */
+      --card: rgba(255,255,255,.72);
+      --card2: rgba(255,255,255,.60);
+      --text: #0d1722;
+      --muted: rgba(13,23,34,.68);
+      --line: rgba(13,23,34,.12);
+      --shadow: 0 18px 45px rgba(0,0,0,.10);
+      --radius: 18px;
+      --radius2: 22px;
 
-      --gold:#c8ad6a;          /* luxuriös */
-      --gold2:#e1d2a0;
-      --whatsapp:#25D366;
+      --gold: #d3b06b;
+      --gold2:#b48f46;
+
+      --ease: cubic-bezier(.2,.8,.2,1);
     }
 
-    *{box-sizing:border-box}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;
-      background: radial-gradient(1200px 600px at 20% 0%, rgba(200,173,106,.25), transparent 55%),
-                  radial-gradient(1000px 600px at 90% 10%, rgba(37,211,102,.12), transparent 55%),
-                  var(--bg);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(211,176,107,.22), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(80,120,170,.14), transparent 55%),
+        linear-gradient(180deg, #f3f5f7 0%, var(--bg) 100%);
+      overflow-x:hidden;
     }
 
-    a{color:inherit}
-    .container{max-width:1100px;margin:0 auto;padding:18px 14px 110px}
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1080px, 92vw); margin:0 auto; }
 
-    /* Header kleiner, Logo größer */
+    /* ---------- Header ---------- */
     header{
-      position:sticky;top:0;z-index:30;
-      backdrop-filter: blur(14px);
-      background: rgba(233,237,242,.75);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:14px;
-      padding:10px 14px;
-      max-width:1100px;margin:0 auto;
-    }
-    .brand{display:flex;align-items:center;gap:12px;min-width:0}
-    .logoWrap{
-      width:64px;height:64px;border-radius:16px;
-      background:#fff; border:1px solid var(--line);
-      box-shadow: 0 10px 25px rgba(15,23,42,.10);
-      display:grid;place-items:center;
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .logoWrap img{width:86%;height:86%;object-fit:contain}
-    .brandText{min-width:0}
-    .brandText b{display:block;font-size:18px;line-height:1.1}
-    .brandText small{display:block;color:var(--muted);margin-top:4px}
-
-    nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-end}
-    .navlink{
-      text-decoration:none;
-      padding:10px 12px;border-radius:14px;
-      color:var(--muted);
-    }
-    .navlink:hover{background:rgba(255,255,255,.65);color:var(--text)}
-    .cta{
-      text-decoration:none;
-      padding:10px 14px;border-radius:16px;
-      background: linear-gradient(180deg,var(--gold2),var(--gold));
-      box-shadow: 0 12px 26px rgba(200,173,106,.30);
-      font-weight:700;
-      white-space:nowrap;
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(230,234,238,.62);
+      border-bottom: 1px solid rgba(255,255,255,.55);
     }
 
-    /* Cards */
-    .card{
-      background: rgba(247,248,250,.92);
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-    section{margin-top:18px}
-
-    /* Ansprechpartner */
-    .owner{
-      display:grid;
-      grid-template-columns: 110px 1fr; /* Bild größer */
-      gap:14px;
-      padding:14px;
-      align-items:center;
-    }
-    .ownerPic{
-      width:110px;height:110px; /* größer wie du wolltest */
-      border-radius:24px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      box-shadow: 0 14px 32px rgba(15,23,42,.12);
-      background:#fff;
-    }
-    .ownerPic img{width:100%;height:100%;object-fit:cover}
-    .owner h2{margin:0 0 6px 0;font-size:18px}
-    .owner p{margin:0;color:var(--muted);line-height:1.5}
-    .owner p a{color:var(--text);text-decoration:underline}
-
-    /* Leistungen */
-    .sectionTitle{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:8px 2px 10px}
-    .sectionTitle h3{margin:0;font-size:28px}
-    .sectionTitle span{color:var(--muted);font-weight:600}
-    .list{
-      display:grid;gap:10px;
-      padding:14px;
-    }
-    .pill{
-      display:flex;align-items:center;gap:10px;
-      padding:14px 14px;
-      border-radius:18px;
-      background: rgba(255,255,255,.70);
-      border:1px solid var(--line);
-      font-weight:700;
-    }
-    .dot{
-      width:26px;height:26px;border-radius:10px;
-      display:grid;place-items:center;
-      background: rgba(200,173,106,.20);
-      border:1px solid rgba(200,173,106,.35);
-      flex:0 0 auto;
-    }
-
-    /* Projekte */
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap:12px;
-      padding:14px;
-    }
-    .proj{
-      position:relative;
-      border-radius:22px;
-      overflow:hidden;
-      border:1px solid var(--line);
-      background:#fff;
-      min-height:160px;
-      cursor:pointer;
-      transform: translateZ(0);
-      transition: transform .18s ease, box-shadow .18s ease;
-    }
-    .proj:hover{transform: scale(1.01); box-shadow: 0 18px 40px rgba(15,23,42,.14)}
-    .proj img{width:100%;height:100%;object-fit:cover;display:block}
-    .badge{
-      position:absolute;left:10px;right:10px;bottom:10px;
-      padding:10px 12px;border-radius:16px;
-      background: rgba(247,248,250,.92);
-      border:1px solid var(--line);
-      backdrop-filter: blur(10px);
-    }
-    .badge b{display:block}
-    .badge small{color:var(--muted);font-weight:600}
-
-    /* Lightbox (Fix: Bild wird angezeigt) */
-    .lightbox{
-      position:fixed;inset:0;
-      background: rgba(15,23,42,.62);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:16px;
-      z-index:9999;
-    }
-    .lightbox.open{display:flex}
-    .lightboxInner{
-      width:min(980px, 96vw);
-      max-height: 86vh;
-      background: rgba(247,248,250,.96);
-      border:1px solid rgba(255,255,255,.35);
-      border-radius:22px;
-      overflow:hidden;
-      box-shadow: 0 28px 90px rgba(0,0,0,.35);
-    }
-    .lightboxTop{
-      display:flex;align-items:center;justify-content:space-between;gap:10px;
-      padding:12px 14px;
-      border-bottom:1px solid var(--line);
-    }
-    .lightboxTop b{font-size:16px}
-    .closeBtn{
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.75);
-      padding:10px 12px;
-      border-radius:14px;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .lightboxImgWrap{
-      background:#0b1220; /* dunkel hinterm bild */
+    .nav{
       display:flex;
       align-items:center;
-      justify-content:center;
-      height: 70vh; /* wichtig */
+      justify-content:space-between;
+      gap:18px;
+      padding:14px 0;
     }
-    .lightboxImgWrap img{
-      max-width:100%;
-      max-height:100%;
-      object-fit:contain; /* wichtig */
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 240px;
+    }
+
+    .brand-logo{
+      width:64px; height:64px;   /* LOGO größer */
+      border-radius:16px;
+      background: rgba(255,255,255,.75);
+      border: 1px solid rgba(13,23,34,.10);
+      box-shadow: 0 10px 25px rgba(0,0,0,.10);
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+      flex:0 0 auto;
+    }
+    .brand-logo img{
+      width:88%;
+      height:88%;
+      object-fit:contain;
       display:block;
     }
 
-    /* WhatsApp Floating Button */
-    .wa{
-      position:fixed;right:14px;bottom:14px;z-index:50;
-      display:flex;align-items:center;gap:10px;
-      padding:12px 14px;border-radius:999px;
-      background: rgba(247,248,250,.92);
-      border:1px solid var(--line);
-      box-shadow: 0 16px 40px rgba(15,23,42,.16);
-      text-decoration:none;
-      font-weight:900;
+    .brand-text{
+      display:flex;
+      flex-direction:column;
+      line-height:1.1;
     }
-    .waIcon{
-      width:42px;height:42px;border-radius:999px;
-      display:grid;place-items:center;
+    .brand-text b{ font-size:18px; }
+    .brand-text span{ font-size:14px; color:var(--muted); margin-top:5px; }
+
+    .links{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .link{
+      padding:10px 14px;
+      border-radius:999px;
+      color:rgba(13,23,34,.75);
+      background: transparent;
+      border:1px solid transparent;
+      transition: all .22s var(--ease);
+    }
+    .link:hover{
+      background: rgba(255,255,255,.55);
+      border-color: rgba(13,23,34,.10);
+      transform: translateY(-1px);
+    }
+
+    .btn{
+      padding:12px 16px;
+      border-radius:999px;
+      font-weight:700;
+      border:1px solid rgba(13,23,34,.10);
+      background: rgba(255,255,255,.60);
+      transition: all .22s var(--ease);
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.08);
+      white-space:nowrap;
+    }
+    .btn:hover{ transform: translateY(-2px); box-shadow: 0 16px 35px rgba(0,0,0,.12); }
+
+    .btn-gold{
+      border:0;
+      background: linear-gradient(180deg, rgba(211,176,107,.95), rgba(180,143,70,.95));
+      color:#1a1407;
+    }
+
+    /* ---------- Sections ---------- */
+    section{ padding: 26px 0; }
+    .card{
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.60);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius2);
+      overflow:hidden;
+    }
+
+    /* ---------- Hero Text ---------- */
+    .hero-text{
+      padding-top: 28px;
+      padding-bottom: 8px;
+    }
+
+    .hero-inner{
+      padding: 28px 22px;
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(255,255,255,.52));
+      border:1px solid rgba(13,23,34,.10);
+      box-shadow: 0 18px 45px rgba(0,0,0,.10);
+      transform: translateZ(0);
+      animation: fadeUp .55s var(--ease) both;
+    }
+
+    .badge{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding:10px 14px;
+      border-radius:999px;
+      background: rgba(255,255,255,.65);
+      border:1px solid rgba(13,23,34,.10);
+      color: rgba(13,23,34,.75);
+      font-weight:650;
+      margin-bottom:14px;
+    }
+    .badge .dot{
+      width:10px; height:10px;
+      border-radius:50%;
+      background: linear-gradient(180deg, var(--gold), var(--gold2));
+      box-shadow: 0 0 0 6px rgba(211,176,107,.18);
+    }
+
+    h1{
+      margin: 0 0 10px 0;
+      font-size: clamp(26px, 3.2vw, 44px);
+      letter-spacing: -0.02em;
+    }
+    .hero-inner p{
+      margin: 0 0 16px 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 16px;
+      max-width: 60ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top: 10px;
+    }
+
+    /* ---------- Ansprechpartner ---------- */
+    .ansprechpartner-wrap{
+      margin-top: 16px;
+      animation: fadeUp .6s var(--ease) both;
+      animation-delay: .06s;
+    }
+    .ansprechpartner-card{
+      padding: 18px;
+      display:flex;
+      gap:18px;
+      align-items:center;
+    }
+    .ansprechpartner-card img{
+      width: 160px;   /* NUR Bild größer */
+      height: 160px;
+      border-radius: 20px;
+      object-fit: cover;
+      border: 1px solid rgba(13,23,34,.12);
+      box-shadow: 0 14px 30px rgba(0,0,0,.10);
+      background:#fff;
+      flex:0 0 auto;
+    }
+
+    .ansprechpartner-info b{
+      font-size: 18px;
+      display:block;
+      margin-bottom: 6px;
+    }
+    .ansprechpartner-info .line{
+      color: var(--muted);
+      margin: 4px 0;
+    }
+    .ansprechpartner-info a{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* ---------- Leistungen ---------- */
+    .section-head{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:14px;
+      margin-bottom: 14px;
+    }
+    .section-head h2{
+      margin:0;
+      font-size: 30px;
+      letter-spacing:-0.01em;
+    }
+    .section-head span{
+      color: var(--muted);
+      font-weight:600;
+    }
+
+    .list{
+      padding: 14px;
+    }
+
+    .item{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.62);
+      border:1px solid rgba(13,23,34,.10);
+      margin: 10px 0;
+      transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+    }
+    .item:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 35px rgba(0,0,0,.10);
+    }
+    .tick{
+      width:28px; height:28px;
+      border-radius: 10px;
+      display:grid;
+      place-items:center;
+      background: rgba(211,176,107,.20);
+      border:1px solid rgba(180,143,70,.40);
+      font-weight:900;
+      flex:0 0 auto;
+    }
+    .item b{ font-size: 17px; }
+
+    /* ---------- Projekte ---------- */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:14px;
+      padding: 14px;
+    }
+
+    .project{
+      position:relative;
+      border-radius: 18px;
+      overflow:hidden;
+      border:1px solid rgba(13,23,34,.10);
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 16px 35px rgba(0,0,0,.10);
+      cursor:pointer;
+      transition: transform .22s var(--ease), box-shadow .22s var(--ease);
+      min-height: 220px;
+    }
+    .project:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 22px 45px rgba(0,0,0,.14);
+    }
+    .project img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.02) contrast(1.02);
+      transform: scale(1.02);
+    }
+
+    .overlay{
+      position:absolute;
+      left:12px; right:12px; bottom:12px;
+      padding: 12px 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.72);
+      border:1px solid rgba(13,23,34,.10);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .overlay b{ display:block; margin-bottom:4px; }
+    .overlay span{ color: var(--muted); font-weight:600; }
+
+    /* ---------- Kontakt + Maps ---------- */
+    .contact-card{
+      padding: 18px;
+    }
+    .contact-card .line{ color: var(--muted); margin: 6px 0; }
+    .maps{
+      padding: 14px;
+    }
+    iframe{
+      width:100%;
+      height: 280px;
+      border:0;
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.10);
+    }
+
+    /* ---------- WhatsApp Floating ---------- */
+    .wa{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 90;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.70);
+      border: 1px solid rgba(13,23,34,.12);
+      box-shadow: 0 18px 45px rgba(0,0,0,.14);
+      transition: transform .22s var(--ease);
+    }
+    .wa:hover{ transform: translateY(-2px); }
+    .wa .bubble{
+      width:40px; height:40px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
       background: rgba(37,211,102,.18);
       border:1px solid rgba(37,211,102,.35);
       font-weight:900;
-      color: var(--whatsapp);
     }
+    .wa b{ font-weight:900; }
 
-    /* Maps + Footer klein */
-    .mapWrap{padding:14px}
-    .mapFrame{
-      width:100%;
-      height:280px;
-      border:0;
-      border-radius:18px;
-      overflow:hidden;
-      box-shadow: 0 12px 28px rgba(15,23,42,.10);
-    }
+    /* ---------- Footer small ---------- */
     footer{
-      margin-top:16px;
+      padding: 22px 0 90px;
+      color: rgba(13,23,34,.70);
+      font-size: 13px;
       text-align:center;
-      color:var(--muted);
-      font-size:12px;
-      padding:10px 0 0;
     }
-    footer a{color:var(--muted)}
-    footer a:hover{color:var(--text)}
-    .footerRow{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+    footer a{
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      margin: 0 8px;
+    }
 
-    /* Mobile */
-    @media (max-width:720px){
-      .grid{grid-template-columns:1fr}
-      .brandText b{font-size:17px}
-      .logoWrap{width:58px;height:58px}
+    /* ---------- Modal (Bilder groß) ---------- */
+    .modal{
+      position:fixed;
+      inset:0;
+      display:none;
+      z-index: 120;
+      padding: 18px;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      align-items:center;
+      justify-content:center;
+    }
+    .modal.open{ display:flex; }
+
+    .modal-box{
+      width: min(980px, 96vw);
+      border-radius: 18px;
+      overflow:hidden;
+      background: rgba(255,255,255,.85);
+      border: 1px solid rgba(255,255,255,.60);
+      box-shadow: 0 28px 70px rgba(0,0,0,.30);
+      animation: pop .22s var(--ease) both;
+    }
+    .modal-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(13,23,34,.10);
+      background: rgba(255,255,255,.80);
+    }
+    .modal-top b{ font-size: 15px; }
+    .close{
+      border:0;
+      background: rgba(13,23,34,.08);
+      padding: 10px 12px;
+      border-radius: 999px;
+      cursor:pointer;
+      font-weight: 800;
+    }
+    .modal-body{
+      background: #0000;
+    }
+    .modal-body img{
+      width:100%;
+      height: min(78vh, 680px);
+      object-fit: contain;     /* WICHTIG: damit es angezeigt wird */
+      background: rgba(255,255,255,.65);
+      display:block;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 740px){
+      .brand{ min-width: 0; }
+      .brand-text span{ display:none; }
+      .grid{ grid-template-columns: 1fr; }
+      .ansprechpartner-card{ align-items:flex-start; }
+      .ansprechpartner-card img{ width: 165px; height:165px; }
+      .section-head{ flex-direction:column; align-items:flex-start; }
+    }
+
+    @keyframes fadeUp{
+      from{ opacity:0; transform: translateY(10px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+    @keyframes pop{
+      from{ transform: scale(.98); opacity:.6; }
+      to{ transform: scale(1); opacity:1; }
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="topbar">
-      <div class="brand">
-        <div class="logoWrap">
-          <img src="logo.png" alt="A&O Logo" />
-        </div>
-        <div class="brandText">
-          <b>A&O Bauunternehmen</b>
-          <small>Renovierung · Ausbau · Außenarbeiten</small>
-        </div>
-      </div>
 
-      <nav>
-        <a class="navlink" href="#leistungen">Leistungen</a>
-        <a class="navlink" href="#projekte">Projekte</a>
-        <a class="navlink" href="#kontakt">Kontakt</a>
-        <a class="cta" href="https://wa.me/4917684744452?text=Hallo%20A%26O%2C%20ich%20m%C3%B6chte%20ein%20Angebot%20anfragen." target="_blank" rel="noopener">Jetzt anfragen</a>
-      </nav>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <div class="brand-logo">
+            <img src="logo.png" alt="A&O Bauunternehmen Logo">
+          </div>
+          <div class="brand-text">
+            <b>A&O Bauunternehmen</b>
+            <span>Renovierung · Ausbau · Außenarbeiten</span>
+          </div>
+        </div>
+
+        <nav class="links">
+          <a class="link" href="#leistungen">Leistungen</a>
+          <a class="link" href="#projekte">Projekte</a>
+          <a class="btn" href="#kontakt">Kontakt</a>
+          <a class="btn btn-gold" href="#kontakt">Jetzt anfragen</a>
+        </nav>
+      </div>
     </div>
   </header>
 
-  <div class="container">
-
-    <!-- Ansprechpartner (Bild größer) -->
-    <section class="card owner" id="kontakt">
-      <div class="ownerPic">
-        <img src="elvis.jpg" alt="Inhaber Elvis Krasniqi" />
-      </div>
-      <div>
-        <h2>Inhaber & Ansprechpartner: Elvis Krasniqi</h2>
+  <!-- Hero Text (wieder da) -->
+  <section class="hero-text">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="badge"><span class="dot"></span> Seriös. Sauber. Termintreu. – Bad Kreuznach & deutschlandweit nach Absprache</div>
+        <h1>Renovierung & Bauarbeiten – sauber gemacht, starkes Ergebnis.</h1>
         <p>
-          Telefon / WhatsApp: <a href="tel:+4917684744452">0176 84744452</a><br/>
-          E-Mail: <a href="mailto:ao.unternehmende@gmail.com">ao.unternehmende@gmail.com</a><br/>
-          Standort: Kirchwinkel 7, 55545 Planig<br/>
-          Einsatzgebiet: deutschlandweit nach Absprache
+          A&O Bauunternehmen steht für klare Absprachen, saubere Ausführung und ein Ergebnis, das lange hält.
+          Wir nehmen auch Aufträge an, die weit entfernt sind (z.B. 300 km) – deutschlandweit nach Absprache.
         </p>
-      </div>
-    </section>
 
-    <!-- Leistungen (Fix: Baggerarbeiten dazu) -->
-    <section id="leistungen">
-      <div class="sectionTitle">
-        <h3>Leistungen</h3>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="https://wa.me/4917684744452?text=Hallo%20A%26O%20Bauunternehmen,%20ich%20m%C3%B6chte%20ein%20Angebot%20anfragen." target="_blank" rel="noopener">Jetzt per WhatsApp anfragen</a>
+          <a class="btn" href="#leistungen">Leistungen ansehen</a>
+        </div>
+      </div>
+
+      <!-- Ansprechpartner -->
+      <div class="ansprechpartner-wrap card" style="margin-top:16px;">
+        <div class="ansprechpartner-card">
+          <img src="elvis.jpg" alt="Inhaber Elvis Krasniqi">
+          <div class="ansprechpartner-info">
+            <b>Inhaber & Ansprechpartner: Elvis Krasniqi</b>
+            <div class="line">Telefon / WhatsApp: <a href="tel:+4917684744452">0176 84744452</a></div>
+            <div class="line">E-Mail: <a href="mailto:ao.unternehmende@gmail.com">ao.unternehmende@gmail.com</a></div>
+            <div class="line">Standort: Kirchwinkel 7, 55545 Planig</div>
+            <div class="line">Einsatzgebiet: deutschlandweit nach Absprache</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Leistungen -->
+  <section id="leistungen">
+    <div class="container">
+      <div class="section-head">
+        <h2>Leistungen</h2>
         <span>Professionell, sauber & zuverlässig</span>
       </div>
-      <div class="card list">
-        <div class="pill"><div class="dot">✓</div> Fliesenlegen (Bad, Küche, Boden)</div>
-        <div class="pill"><div class="dot">✓</div> Malerarbeiten & Spachteln</div>
-        <div class="pill"><div class="dot">✓</div> Renovierungen & Sanierungen</div>
-        <div class="pill"><div class="dot">✓</div> Boden verlegen (Laminat, Vinyl)</div>
-        <div class="pill"><div class="dot">✓</div> Außenarbeiten (Terrassen, Pflaster)</div>
-        <div class="pill"><div class="dot">✓</div> Fassade / Ausbesserung</div>
-        <div class="pill"><div class="dot">✓</div> Baggerarbeiten & Kanalanschlüsse</div>
-      </div>
-    </section>
 
-    <!-- Projekte (Lightbox Fix) -->
-    <section id="projekte">
-      <div class="sectionTitle">
-        <h3>Projekte</h3>
+      <div class="card list">
+        <div class="item"><div class="tick">✓</div><b>Fliesenlegen (Bad, Küche, Boden)</b></div>
+        <div class="item"><div class="tick">✓</div><b>Malerarbeiten & Spachteln</b></div>
+        <div class="item"><div class="tick">✓</div><b>Renovierungen & Sanierungen</b></div>
+        <div class="item"><div class="tick">✓</div><b>Boden verlegen (Laminat, Vinyl)</b></div>
+        <div class="item"><div class="tick">✓</div><b>Außenarbeiten (Terrassen, Pflaster)</b></div>
+        <div class="item"><div class="tick">✓</div><b>Fassade / Ausbesserung</b></div>
+        <div class="item"><div class="tick">✓</div><b>Baggerarbeiten & Kanalanschlüsse</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projekte -->
+  <section id="projekte">
+    <div class="container">
+      <div class="section-head">
+        <h2>Projekte</h2>
         <span>Tippe auf ein Bild (wird groß)</span>
       </div>
 
-      <div class="card grid">
-        <div class="proj" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
-          <img src="projekt-angebot.jpg" alt="Angebote & Planung" loading="lazy">
-          <div class="badge"><b>Angebote & Planung</b><small>Schnell, klar & transparent – per WhatsApp.</small></div>
-        </div>
+      <div class="card">
+        <div class="grid">
+          <div class="project" data-title="Angebote & Planung" data-img="projekt-angebot.jpg">
+            <img src="projekt-angebot.jpg" alt="Angebote und Planung">
+            <div class="overlay">
+              <b>Angebote & Planung</b>
+              <span>Schnell, klar & transparent – per WhatsApp anfragen.</span>
+            </div>
+          </div>
 
-        <div class="proj" data-title="Innenausbau" data-src="projekt-innen.jpg">
-          <img src="projekt-innen.jpg" alt="Innenausbau" loading="lazy">
-          <div class="badge"><b>Innenausbau</b><small>Renovierung, Ausbau, saubere Ausführung.</small></div>
-        </div>
+          <div class="project" data-title="Innenausbau" data-img="projekt-innen.jpg">
+            <img src="projekt-innen.jpg" alt="Innenausbau">
+            <div class="overlay">
+              <b>Innenausbau</b>
+              <span>Renovierung, Ausbau, saubere Details.</span>
+            </div>
+          </div>
 
-        <div class="proj" data-title="Malerarbeiten" data-src="projekt-maler.jpg">
-          <img src="projekt-maler.jpg" alt="Malerarbeiten" loading="lazy">
-          <div class="badge"><b>Malerarbeiten</b><small>Saubere Kanten, gleichmäßiges Finish.</small></div>
-        </div>
+          <div class="project" data-title="Malerarbeiten" data-img="projekt-maler.jpg">
+            <img src="projekt-maler.jpg" alt="Malerarbeiten">
+            <div class="overlay">
+              <b>Malerarbeiten</b>
+              <span>Frischer Look – sauber & ordentlich.</span>
+            </div>
+          </div>
 
-        <div class="proj" data-title="Neubau / Außen" data-src="projekt-neubau.jpg">
-          <img src="projekt-neubau.jpg" alt="Neubau / Außen" loading="lazy">
-          <div class="badge"><b>Neubau / Außen</b><small>Fassade, Terrassen, Pflaster – starkes Ergebnis.</small></div>
-        </div>
+          <div class="project" data-title="Neubau / Außen" data-img="projekt-neubau.jpg">
+            <img src="projekt-neubau.jpg" alt="Neubau und Außenarbeiten">
+            <div class="overlay">
+              <b>Neubau / Außen</b>
+              <span>Fassade, Außenbereich, Premium-Finish.</span>
+            </div>
+          </div>
 
-        <div class="proj" data-title="Rohbau / Baustelle" data-src="projekt-rohbau.jpg">
-          <img src="projekt-rohbau.jpg" alt="Rohbau / Baustelle" loading="lazy">
-          <div class="badge"><b>Rohbau / Baustelle</b><small>Zuverlässig – termintreu & strukturiert.</small></div>
+          <div class="project" data-title="Rohbau / Baustelle" data-img="projekt-rohbau.jpg">
+            <img src="projekt-rohbau.jpg" alt="Rohbau Baustelle">
+            <div class="overlay">
+              <b>Rohbau / Baustelle</b>
+              <span>Zuverlässig auf der Baustelle – termintreu & strukturiert.</span>
+            </div>
+          </div>
+
+          <div class="project" data-title="A&O Bauunternehmen" data-img="projekt-neubau.jpg">
+            <img src="projekt-neubau.jpg" alt="Weitere Projekte">
+            <div class="overlay">
+              <b>Weitere Projekte</b>
+              <span>Mehr Referenzen folgen – frag uns gerne per WhatsApp.</span>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
 
-    <!-- Google Maps (neu) -->
-    <section>
-      <div class="sectionTitle">
-        <h3>Standort</h3>
-        <span>Kirchwinkel 7, 55545 Planig</span>
+    </div>
+  </section>
+
+  <!-- Kontakt + Maps -->
+  <section id="kontakt">
+    <div class="container">
+      <div class="section-head">
+        <h2>Kontakt</h2>
+        <span>Einfach per WhatsApp – wir antworten schnell</span>
       </div>
-      <div class="card mapWrap">
-        <!-- Wenn du eine andere Adresse willst: sag kurz Bescheid -->
+
+      <div class="card contact-card">
+        <div class="line"><b>A&O Bauunternehmen</b></div>
+        <div class="line">Ansprechpartner: Elvis Krasniqi</div>
+        <div class="line">Telefon / WhatsApp: <a href="tel:+4917684744452">0176 84744452</a></div>
+        <div class="line">E-Mail: <a href="mailto:ao.unternehmende@gmail.com">ao.unternehmende@gmail.com</a></div>
+        <div class="line">Standort: Kirchwinkel 7, 55545 Planig</div>
+        <div class="line">Deutschlandweit nach Absprache (auch 300 km möglich)</div>
+
+        <div style="margin-top:12px;">
+          <a class="btn btn-gold" href="https://wa.me/4917684744452?text=Hallo%20A%26O%20Bauunternehmen,%20ich%20m%C3%B6chte%20ein%20Angebot%20anfragen." target="_blank" rel="noopener">Jetzt per WhatsApp anfragen</a>
+        </div>
+      </div>
+
+      <div class="maps">
         <iframe
-          class="mapFrame"
+          src="https://www.google.com/maps?q=Kirchwinkel+7+55545+Planig&output=embed"
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=Kirchwinkel%207,%2055545%20Planig&output=embed">
+          allowfullscreen>
         </iframe>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer>
-      <div class="footerRow">
-        <a href="#impressum">Impressum</a>
-        <span>•</span>
-        <a href="#datenschutz">Datenschutz</a>
+  <!-- Footer klein -->
+  <footer>
+    © 2026 A&O Bauunternehmen
+    <a href="#impressum">Impressum</a>
+    <a href="#datenschutz">Datenschutz</a>
+  </footer>
+
+  <!-- Mini-Sections (nur Platzhalter, klein) -->
+  <section id="impressum" style="padding:0 0 22px;">
+    <div class="container" style="color:rgba(13,23,34,.75); font-size:13px;">
+      <div class="card" style="padding:14px;">
+        <b>Impressum</b><br>
+        A&O Bauunternehmen · Kirchwinkel 7, 55545 Planig · Vertreten durch: Elvis Krasniqi ·
+        Tel: 0176 84744452 · E-Mail: ao.unternehmende@gmail.com
       </div>
-      <div style="margin-top:6px">© 2026 A&O Bauunternehmen</div>
+    </div>
+  </section>
 
-      <!-- klein “verpackt” -->
-      <div id="impressum" style="display:none"></div>
-      <div id="datenschutz" style="display:none"></div>
-    </footer>
-  </div>
+  <section id="datenschutz" style="padding:0 0 90px;">
+    <div class="container" style="color:rgba(13,23,34,.75); font-size:13px;">
+      <div class="card" style="padding:14px;">
+        <b>Datenschutz</b><br>
+        Diese Website speichert keine Tracking-Daten. Kontakt erfolgt per Telefon/WhatsApp/E-Mail.
+      </div>
+    </div>
+  </section>
 
-  <!-- WhatsApp Button -->
-  <a class="wa" href="https://wa.me/4917684744452?text=Hallo%20A%26O%2C%20ich%20m%C3%B6chte%20ein%20Angebot%20anfragen." target="_blank" rel="noopener">
-    <div class="waIcon">WA</div>
-    WhatsApp – Angebot
+  <!-- WhatsApp Floating Button -->
+  <a class="wa" href="https://wa.me/4917684744452?text=Hallo%20A%26O%20Bauunternehmen,%20ich%20m%C3%B6chte%20ein%20Angebot%20anfragen." target="_blank" rel="noopener">
+    <div class="bubble">WA</div>
+    <b>WhatsApp – Angebot</b>
   </a>
 
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <div class="lightboxInner">
-      <div class="lightboxTop">
-        <b id="lbTitle">Bild</b>
-        <button class="closeBtn" id="lbClose">Schließen ×</button>
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-box">
+      <div class="modal-top">
+        <b id="modalTitle">Bild</b>
+        <button class="close" id="modalClose">Schließen ✕</button>
       </div>
-      <div class="lightboxImgWrap">
-        <img id="lbImg" src="" alt="">
+      <div class="modal-body">
+        <img id="modalImg" alt="Projekt groß">
       </div>
     </div>
   </div>
 
   <script>
-    // Lightbox FIX: richtiges src setzen + anzeigen
-    const lb = document.getElementById('lightbox');
-    const lbImg = document.getElementById('lbImg');
-    const lbTitle = document.getElementById('lbTitle');
-    const lbClose = document.getElementById('lbClose');
+    // Modal öffnen (Bilder groß) - FIX: lädt korrekt und zeigt Bild
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modalImg');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalClose = document.getElementById('modalClose');
 
-    function openLightbox(src, title){
-      lbTitle.textContent = title || 'Projekt';
-      lbImg.src = src;
-      lbImg.alt = title || 'Projekt';
-      lb.classList.add('open');
-      lb.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
+    function openModal(title, img){
+      modalTitle.textContent = title || "Projekt";
+      // wichtig: src erst setzen, wenn modal geöffnet wird
+      modal.classList.add('open');
+      modalImg.src = img;
+      modalImg.onload = () => {};
+      modalImg.onerror = () => {
+        // falls Bildpfad falsch: leeres Bild vermeiden
+        modalImg.removeAttribute('src');
+      };
     }
 
-    function closeLightbox(){
-      lb.classList.remove('open');
-      lb.setAttribute('aria-hidden','true');
-      lbImg.src = '';
-      document.body.style.overflow='';
+    function closeModal(){
+      modal.classList.remove('open');
+      // src löschen, damit iOS nicht komisch cached
+      modalImg.removeAttribute('src');
     }
 
-    document.querySelectorAll('.proj').forEach(card=>{
+    document.querySelectorAll('.project').forEach(card=>{
       card.addEventListener('click', ()=>{
-        const src = card.getAttribute('data-src');
         const title = card.getAttribute('data-title');
-        openLightbox(src, title);
+        const img = card.getAttribute('data-img');
+        openModal(title, img);
       });
     });
 
-    lbClose.addEventListener('click', closeLightbox);
-    lb.addEventListener('click', (e)=>{
-      if(e.target === lb) closeLightbox();
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{
+      if(e.target === modal) closeModal();
     });
+
+    // ESC am Desktop
     document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape') closeLightbox();
+      if(e.key === 'Escape') closeModal();
     });
   </script>
 </body>
