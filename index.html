@@ -215,12 +215,6 @@
       transition:.35s transform;
     }
     .proj:hover img{transform:scale(1.04)}
-
-    /* ✅ (1) STIFT höher: nur erstes Projektbild */
-    .proj.stift img{
-      object-position: center 12%;
-    }
-
     .cap{
       position:absolute; left:14px; right:14px; bottom:14px;
       padding:12px 14px;
@@ -232,6 +226,11 @@
     .cap b{display:block;font-size:16px}
     .cap small{display:block;color:var(--muted);margin-top:4px;font-weight:700}
 
+    /* ✅ Änderung 1: nur das Stift-Bild verschieben (mehr unten sichtbar) */
+    .proj img.penfix{
+      object-position: center 82%;
+    }
+
     /* Google Maps */
     .map{
       width:100%; height:340px;
@@ -242,17 +241,15 @@
       border:1px solid rgba(17,24,39,.10);
     }
 
-    /* Ansprechpartner card (nur Bild größer, Box bleibt) */
+    /* Ansprechpartner card (nur Bild größer, Box nicht aufblasen) */
     .contactRow{
       display:grid;
-      /* ✅ (2) mehr Platz links fürs Foto */
-      grid-template-columns: 200px 1fr;
+      grid-template-columns: 140px 1fr;
       gap:16px;
       align-items:center;
     }
     .avatar{
-      /* ✅ (2) Foto größer */
-      width:200px;height:200px;
+      width:140px;height:140px; /* Basis */
       border-radius:26px;
       overflow:hidden;
       border:1px solid rgba(17,24,39,.10);
@@ -269,7 +266,7 @@
       color:var(--muted);
       font-weight:700;
       line-height:1.5;
-      word-break:break-word; /* damit nix abgeschnitten wird */
+      word-break:break-word;
     }
     .cText a{color:#0f172a}
     .smallnote{
@@ -281,6 +278,14 @@
       color:#111827;
       font-weight:800;
     }
+
+    /* ✅ Änderung 2: Kontakt-Box bleibt kompakt, aber Avatar wird größer (mehr links genutzt) */
+    .contactCard .cardpad{padding:16px}
+    .contactCard .contactRow{grid-template-columns: 170px 1fr}
+    .contactCard .avatar{width:170px;height:170px}
+    .contactCard .cText h3{font-size:20px;margin-bottom:6px}
+    .contactCard .cText .line{font-size:15px}
+    .contactCard .smallnote{padding:8px 10px;font-size:13px}
 
     /* Floating WhatsApp */
     .wa{
@@ -361,16 +366,15 @@
       .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
       .proj img{height:300px}
-      /* Mobile: Foto trotzdem größer, aber nicht zu fett */
-      .contactRow{grid-template-columns: 160px 1fr}
-      .avatar{width:160px;height:160px}
     }
     @media (max-width: 520px){
       .brand{min-width:0}
       .btext b{font-size:16px}
       .logo{width:58px;height:58px}
-      .contactRow{grid-template-columns: 140px 1fr}
-      .avatar{width:140px;height:140px}
+      .contactRow{grid-template-columns: 120px 1fr}
+      .avatar{width:120px;height:120px}
+      .contactCard .contactRow{grid-template-columns: 140px 1fr}
+      .contactCard .avatar{width:140px;height:140px}
       .btn{min-width:170px}
     }
   </style>
@@ -408,7 +412,6 @@
         <h1>Renovierung & Bauarbeiten – sauber gemacht, starkes Ergebnis.</h1>
         <p>A&O Bauunternehmen steht für klare Absprachen, saubere Ausführung und ein Ergebnis, das lange hält.</p>
 
-        <!-- kleiner extra text (dein Punkt 4) -->
         <p class="subline">Kurz & direkt: Schreib uns auf WhatsApp – wir antworten schnell und sagen dir sofort, ob wir dein Projekt annehmen.</p>
 
         <div class="btnrow">
@@ -469,9 +472,9 @@
       </div>
 
       <div class="grid">
-        <!-- ✅ bekommt class "stift" -->
-        <div class="proj stift" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
-          <img src="projekt-angebot.jpg" alt="Angebote & Planung">
+        <div class="proj" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
+          <!-- ✅ penfix NUR hier -->
+          <img class="penfix" src="projekt-angebot.jpg" alt="Angebote & Planung">
           <div class="cap">
             <b>Angebote & Planung</b>
             <small>Schnell, klar & transparent – per WhatsApp anfragen.</small>
@@ -512,7 +515,7 @@
       </div>
     </section>
 
-    <!-- GOOGLE MAPS (bleibt drin) -->
+    <!-- GOOGLE MAPS -->
     <section class="section" id="maps">
       <div class="headrow" style="margin-bottom:10px">
         <h2 style="margin:0;font-size:28px">Standort</h2>
@@ -527,8 +530,8 @@
       </iframe>
     </section>
 
-    <!-- ANSPRECHPARTNER: nach unten verschoben (dein Punkt 3) -->
-    <section class="section card" id="kontakt">
+    <!-- ANSPRECHPARTNER -->
+    <section class="section card contactCard" id="kontakt">
       <div class="cardpad">
         <div class="contactRow">
           <div class="avatar">
@@ -545,14 +548,12 @@
               Einsatzgebiet: deutschlandweit nach Absprache
             </div>
 
-            <!-- kleiner Zusatztext (nochmal, aber kurz) -->
             <div class="smallnote">Je besser die Infos, desto schneller das Angebot: Fotos + Maß/Fläche + Ort.</div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Footer klein “verpackt” -->
     <footer>
       <div>© 2026 A&O Bauunternehmen</div>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -576,13 +577,12 @@
         <div id="modalTitle">Projekt</div>
         <button class="close" id="modalClose">Schließen ×</button>
       </div>
-      <!-- FIX: hier wird das Bild wirklich gesetzt, sonst bleibt es schwarz -->
       <img class="modalimg" id="modalImg" alt="Projekt groß">
     </div>
   </div>
 
   <script>
-    // Projekte → Modal öffnen (Fix für "wird groß aber nicht angezeigt")
+    // Projekte → Modal öffnen
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
@@ -594,14 +594,14 @@
         const title = card.getAttribute('data-title') || 'Projekt';
 
         modalTitle.textContent = title;
-        modalImg.src = src; // <- wichtig
+        modalImg.src = src;
         modal.classList.add('show');
       });
     });
 
     function closeModal(){
       modal.classList.remove('show');
-      modalImg.src = ''; // reset
+      modalImg.src = '';
     }
     modalClose.addEventListener('click', closeModal);
     modal.addEventListener('click', (e) => {
