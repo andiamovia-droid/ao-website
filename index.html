@@ -215,6 +215,10 @@
       transition:.35s transform;
     }
     .proj:hover img{transform:scale(1.04)}
+
+    /* ✅ FIX 1: Stift im ersten Bild sichtbarer (Ausschnitt nach unten verschoben) */
+    .proj--pen img{ object-position:center 78%; }
+
     .cap{
       position:absolute; left:14px; right:14px; bottom:14px;
       padding:12px 14px;
@@ -236,22 +240,17 @@
       border:1px solid rgba(17,24,39,.10);
     }
 
-    /* Ansprechpartner card (Kasten kleiner + Bild größer) */
-    #kontakt.card{
-      max-width:860px;              /* Kasten kleiner (nicht volle Breite) */
-      margin-left:auto;
-      margin-right:auto;
-    }
-    #kontakt .cardpad{padding:14px;} /* etwas weniger Padding -> kompakter */
+    /* Ansprechpartner card (Box etwas kompakter, Bild größer) */
+    .contactCard .cardpad{ padding:14px; } /* ✅ FIX 2: Kasten kleiner (weniger Padding) */
 
     .contactRow{
       display:grid;
-      grid-template-columns: 190px 1fr; /* mehr Platz fürs Bild */
-      gap:16px;
+      grid-template-columns: 160px 1fr; /* ✅ Bild-Spalte größer */
+      gap:14px;                          /* etwas enger */
       align-items:center;
     }
     .avatar{
-      width:190px;height:190px;     /* Bild deutlich größer */
+      width:160px;height:160px;          /* ✅ Bild größer */
       border-radius:26px;
       overflow:hidden;
       border:1px solid rgba(17,24,39,.10);
@@ -268,7 +267,7 @@
       color:var(--muted);
       font-weight:700;
       line-height:1.5;
-      word-break:break-word;
+      word-break:break-word; /* damit nix abgeschnitten wird */
     }
     .cText a{color:#0f172a}
     .smallnote{
@@ -360,20 +359,16 @@
       .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
       .proj img{height:300px}
-
-      /* Ansprechpartner auf Mobile: kompakt, aber Bild groß */
-      #kontakt.card{max-width:100%;}
-      .contactRow{grid-template-columns: 170px 1fr;}
-      .avatar{width:170px;height:170px;}
     }
     @media (max-width: 520px){
       .brand{min-width:0}
       .btext b{font-size:16px}
       .logo{width:58px;height:58px}
 
-      /* Mobile ganz klein: Bild oben, Text darunter -> wirkt kleiner, Bild bleibt groß */
-      .contactRow{grid-template-columns:1fr; gap:12px;}
-      .avatar{width:180px;height:180px; margin:0 auto;}
+      /* ✅ mobile: Box kompakter, Bild trotzdem größer */
+      .contactRow{grid-template-columns: 150px 1fr; gap:12px}
+      .avatar{width:150px;height:150px}
+
       .btn{min-width:170px}
     }
   </style>
@@ -471,7 +466,8 @@
       </div>
 
       <div class="grid">
-        <div class="proj" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
+        <!-- ✅ FIX 1: extra class für Stift-Ausschnitt -->
+        <div class="proj proj--pen" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
           <img src="projekt-angebot.jpg" alt="Angebote & Planung">
           <div class="cap">
             <b>Angebote & Planung</b>
@@ -529,7 +525,7 @@
     </section>
 
     <!-- ANSPRECHPARTNER -->
-    <section class="section card" id="kontakt">
+    <section class="section card contactCard" id="kontakt">
       <div class="cardpad">
         <div class="contactRow">
           <div class="avatar">
@@ -552,6 +548,7 @@
       </div>
     </section>
 
+    <!-- Footer klein -->
     <footer>
       <div>© 2026 A&O Bauunternehmen</div>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
@@ -580,6 +577,7 @@
   </div>
 
   <script>
+    // Projekte → Modal öffnen
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
