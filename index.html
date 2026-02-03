@@ -1,604 +1,133 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>A&O Bauunternehmen – Renovierung, Ausbau, Außenarbeiten</title>
-  <meta name="description" content="A&O Bauunternehmen – zuverlässig, sauber, termintreu. Renovierung, Fliesen, Malerarbeiten, Fassade, Pflaster, Baggerarbeiten, Kanalanschlüsse, Hausisolierung. Deutschlandweit nach Absprache." />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>A&O Bauunternehmen – Renovierung, Ausbau, Außenarbeiten</title>
 
-  <style>
-    :root{
-      --bg:#e7eaee;          /* leicht grau */
-      --card:rgba(255,255,255,.72);
-      --card2:rgba(255,255,255,.58);
-      --text:#111827;
-      --muted:#4b5563;
-      --line:rgba(17,24,39,.10);
-      --shadow:0 18px 45px rgba(17,24,39,.14);
-      --radius:22px;
-      --gold1:#b48a2b;
-      --gold2:#d7b35a;
-    }
+<style>
+:root{
+  --bg:#dde2e7;   /* etwas grauer als vorher */
+  --card:rgba(255,255,255,.72);
+  --text:#111827;
+  --muted:#4b5563;
+  --line:rgba(17,24,39,.10);
+  --shadow:0 18px 45px rgba(17,24,39,.14);
+  --radius:22px;
+  --gold1:#b48a2b;
+  --gold2:#d7b35a;
+}
 
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(900px 500px at 20% 0%, rgba(180,138,43,.14), transparent 55%),
-        radial-gradient(800px 500px at 85% 10%, rgba(17,24,39,.08), transparent 55%),
-        linear-gradient(180deg, #eef1f4 0%, var(--bg) 65%, #e3e6ea 100%);
-      overflow-x:hidden;
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  color:var(--text);
+  background:linear-gradient(180deg,#eef1f4 0%,var(--bg) 70%);
+}
 
-    a{color:inherit}
-    .wrap{max-width:1120px;margin:0 auto;padding:18px 16px 90px}
+.wrap{max-width:1120px;margin:0 auto;padding:18px 16px 90px}
 
-    /* Glass header */
-    .topbar{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter: blur(14px);
-      background: rgba(231,234,238,.70);
-      border-bottom:1px solid rgba(17,24,39,.10);
-    }
-    .topinner{
-      max-width:1120px;margin:0 auto;
-      padding:14px 16px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:14px;
-    }
-    .brand{display:flex;align-items:center;gap:12px;min-width:220px}
-    .logo{
-      width:64px;height:64px; /* größer */
-      border-radius:18px;
-      background:rgba(255,255,255,.65);
-      box-shadow: 0 10px 28px rgba(17,24,39,.12);
-      border:1px solid rgba(17,24,39,.10);
-      display:flex;align-items:center;justify-content:center;
-      overflow:hidden;
-      flex:0 0 auto;
-    }
-    .logo img{width:100%;height:100%;object-fit:cover}
-    .btext{line-height:1.15}
-    .btext b{display:block;font-size:18px}
-    .btext small{display:block;color:var(--muted);margin-top:6px}
+/* Header */
+.topbar{position:sticky;top:0;background:rgba(255,255,255,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topinner{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;max-width:1120px;margin:auto}
+.logo{width:68px;height:68px;border-radius:18px;overflow:hidden}
+.logo img{width:100%;height:100%;object-fit:cover}
+.nav a{margin-left:10px;padding:10px 14px;border-radius:999px;text-decoration:none;background:white;border:1px solid var(--line);font-weight:700}
+.cta{background:linear-gradient(var(--gold2),var(--gold1))}
 
-    .nav{
-      display:flex; gap:10px; align-items:center; justify-content:flex-end;
-      flex-wrap:wrap;
-    }
-    .pill{
-      padding:10px 14px;
-      border-radius:999px;
-      background: rgba(255,255,255,.55);
-      border:1px solid rgba(17,24,39,.10);
-      color:#111827;
-      text-decoration:none;
-      font-weight:600;
-      transition:.2s transform, .2s background;
-    }
-    .pill:hover{transform:translateY(-1px); background:rgba(255,255,255,.75)}
-    .cta{
-      padding:11px 16px;
-      border-radius:999px;
-      background: linear-gradient(180deg, var(--gold2), var(--gold1));
-      color:#111827;
-      border:1px solid rgba(17,24,39,.12);
-      box-shadow: 0 10px 28px rgba(180,138,43,.22);
-    }
+/* HERO */
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;margin-top:18px}
+.herobox{background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+h1{font-size:38px;margin:10px 0}
+.btn{display:inline-block;padding:12px 16px;border-radius:14px;background:var(--gold2);font-weight:800;text-decoration:none}
 
-    /* Sections */
-    .section{margin-top:18px}
-    .card{
-      background:var(--card);
-      border:1px solid rgba(17,24,39,.10);
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .cardpad{padding:18px}
-    .hero{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 1.25fr .75fr;
-      gap:14px;
-      align-items:stretch;
-    }
-    .herobox{
-      background:var(--card);
-      border:1px solid rgba(17,24,39,.10);
-      border-radius:var(--radius);
-      box-shadow: var(--shadow);
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .badge{
-      display:inline-flex;align-items:center;gap:10px;
-      padding:10px 12px;border-radius:999px;
-      background:rgba(255,255,255,.58);
-      border:1px solid rgba(17,24,39,.10);
-      color:#111827;
-      font-weight:700;
-    }
-    .dot{
-      width:10px;height:10px;border-radius:99px;
-      background: linear-gradient(180deg, var(--gold2), var(--gold1));
-      box-shadow: 0 0 0 6px rgba(180,138,43,.16);
-    }
-    h1{font-size:40px;letter-spacing:-.02em;margin:14px 0 10px}
-    p{margin:0;color:var(--muted);font-size:16px;line-height:1.55}
-    .subline{margin-top:10px;font-weight:700;color:#1f2937}
-    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px 16px;border-radius:14px;
-      border:1px solid rgba(17,24,39,.10);
-      text-decoration:none;font-weight:800;
-      background:rgba(255,255,255,.65);
-      transition:.2s transform;
-      min-width:210px;
-    }
-    .btn:hover{transform:translateY(-1px)}
-    .btn.gold{
-      background: linear-gradient(180deg, var(--gold2), var(--gold1));
-      box-shadow: 0 10px 26px rgba(180,138,43,.20);
-    }
+/* Leistungen */
+.section{margin-top:20px}
+.list .li{padding:14px;border-radius:18px;background:white;margin-top:8px;font-weight:800}
 
-    .facts{
-      display:grid; gap:10px; margin-top:14px;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-    }
-    .fact{
-      display:flex; gap:10px; align-items:center;
-      padding:10px 12px;
-      background:rgba(255,255,255,.58);
-      border:1px solid rgba(17,24,39,.10);
-      border-radius:16px;
-      font-weight:700;
-      color:#111827;
-    }
-    .check{
-      width:26px;height:26px;border-radius:10px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(17,24,39,.06);
-      border:1px solid rgba(17,24,39,.10);
-      font-weight:900;
-    }
+/* Projekte */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.proj{position:relative;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer}
+.proj img{width:100%;height:320px;object-fit:cover;transition:.3s}
 
-    /* Leistungen */
-    .headrow{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
-    .headrow h2{margin:0;font-size:34px;letter-spacing:-.02em}
-    .headrow span{color:var(--muted);font-weight:700}
-    .list{
-      display:grid; gap:10px; margin-top:14px;
-      grid-template-columns: 1fr;
-    }
-    .li{
-      display:flex;align-items:center;gap:12px;
-      padding:14px 14px;
-      border-radius:18px;
-      background:rgba(255,255,255,.60);
-      border:1px solid rgba(17,24,39,.10);
-      font-weight:800;
-      transition:.2s transform;
-    }
-    .li:hover{transform:translateY(-1px)}
-    .ico{
-      width:34px;height:34px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(180,138,43,.12);
-      border:1px solid rgba(17,24,39,.10);
-      font-weight:900;
-    }
+/* 🔥 HIER DER STIFT-FIX */
+.proj[data-src="projekt-angebot.jpg"] img{
+  object-position:50% 80%; /* höherer Ausschnitt → Stift sichtbar */
+}
 
-    /* Projekte grid */
-    .grid{
-      display:grid; gap:14px; margin-top:14px;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-    }
-    .proj{
-      position:relative;
-      border-radius:24px;
-      overflow:hidden;
-      border:1px solid rgba(17,24,39,.10);
-      background:rgba(255,255,255,.55);
-      box-shadow: var(--shadow);
-      cursor:pointer;
-      transform: translateZ(0);
-    }
-    .proj img{
-      width:100%;height:320px;object-fit:cover;
-      display:block;
-      filter:saturate(1.02) contrast(1.02);
-      transition:.35s transform;
-    }
-    .proj:hover img{transform:scale(1.04)}
-    .cap{
-      position:absolute; left:14px; right:14px; bottom:14px;
-      padding:12px 14px;
-      border-radius:18px;
-      background:rgba(255,255,255,.72);
-      border:1px solid rgba(17,24,39,.10);
-      backdrop-filter: blur(10px);
-    }
-    .cap b{display:block;font-size:16px}
-    .cap small{display:block;color:var(--muted);margin-top:4px;font-weight:700}
+.cap{position:absolute;bottom:12px;left:12px;right:12px;background:white;padding:10px;border-radius:16px}
 
-    /* Google Maps */
-    .map{
-      width:100%; height:340px;
-      border:0;
-      border-radius:22px;
-      overflow:hidden;
-      box-shadow: var(--shadow);
-      border:1px solid rgba(17,24,39,.10);
-    }
+/* Ansprechpartner */
+.contactRow{display:grid;grid-template-columns:140px 1fr;gap:16px}
+.avatar{width:140px;height:140px;border-radius:26px;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
 
-    /* Ansprechpartner card (nur Bild größer, Box bleibt) */
-    .contactRow{
-      display:grid;
-      grid-template-columns: 140px 1fr;
-      gap:16px;
-      align-items:center;
-    }
-    .avatar{
-      width:140px;height:140px; /* Bild größer */
-      border-radius:26px;
-      overflow:hidden;
-      border:1px solid rgba(17,24,39,.10);
-      box-shadow: 0 14px 34px rgba(17,24,39,.14);
-      background:rgba(255,255,255,.55);
-    }
-    .avatar img{width:100%;height:100%;object-fit:cover}
-    .cText{
-      min-width:0;
-      overflow:hidden;
-    }
-    .cText h3{margin:0 0 8px;font-size:22px}
-    .cText .line{
-      color:var(--muted);
-      font-weight:700;
-      line-height:1.5;
-      word-break:break-word; /* damit nix abgeschnitten wird */
-    }
-    .cText a{color:#0f172a}
-    .smallnote{
-      margin-top:10px;
-      padding:10px 12px;
-      border-radius:16px;
-      background:rgba(255,255,255,.58);
-      border:1px solid rgba(17,24,39,.10);
-      color:#111827;
-      font-weight:800;
-    }
-
-    /* Floating WhatsApp */
-    .wa{
-      position:fixed; right:16px; bottom:16px; z-index:80;
-      display:flex; align-items:center; gap:10px;
-      padding:12px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.78);
-      border:1px solid rgba(17,24,39,.12);
-      box-shadow: 0 18px 50px rgba(17,24,39,.18);
-      text-decoration:none;
-      font-weight:900;
-    }
-    .wa .wac{
-      width:38px;height:38px;border-radius:999px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(34,197,94,.18);
-      border:1px solid rgba(17,24,39,.10);
-      font-weight:1000;
-    }
-
-    /* Modal */
-    .modal{
-      position:fixed; inset:0; z-index:90;
-      display:none;
-      background: rgba(15,23,42,.62);
-      backdrop-filter: blur(10px);
-      padding:18px;
-    }
-    .modal.show{display:flex;align-items:center;justify-content:center}
-    .modalbox{
-      width:min(980px, 100%);
-      max-height: 88vh;
-      border-radius:24px;
-      overflow:hidden;
-      background: rgba(255,255,255,.86);
-      border:1px solid rgba(255,255,255,.20);
-      box-shadow: 0 30px 90px rgba(0,0,0,.35);
-    }
-    .modalhead{
-      display:flex;justify-content:space-between;align-items:center;
-      padding:12px 14px;
-      background: rgba(255,255,255,.72);
-      border-bottom:1px solid rgba(17,24,39,.10);
-      font-weight:900;
-    }
-    .close{
-      border:1px solid rgba(17,24,39,.12);
-      background: rgba(255,255,255,.75);
-      border-radius:999px;
-      padding:8px 12px;
-      font-weight:900;
-      cursor:pointer;
-    }
-    .modalimg{
-      width:100%;
-      height: calc(88vh - 56px);
-      object-fit: contain;
-      display:block;
-      background:#0b1020;
-    }
-
-    /* Footer small */
-    footer{
-      margin-top:18px;
-      color:rgba(17,24,39,.55);
-      font-weight:800;
-      font-size:12px;
-      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
-      justify-content:space-between;
-    }
-    footer a{color:rgba(17,24,39,.65);text-decoration:none}
-    footer a:hover{text-decoration:underline}
-
-    /* Responsive */
-    @media (max-width: 860px){
-      h1{font-size:34px}
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
-      .proj img{height:300px}
-    }
-    @media (max-width: 520px){
-      .brand{min-width:0}
-      .btext b{font-size:16px}
-      .logo{width:58px;height:58px}
-      .contactRow{grid-template-columns: 120px 1fr}
-      .avatar{width:120px;height:120px}
-      .btn{min-width:170px}
-    }
-  </style>
+/* Modal */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+.modal.show{display:flex}
+.modalimg{max-width:90%;max-height:80vh}
+</style>
 </head>
 
 <body>
-  <div class="topbar">
-    <div class="topinner">
-      <div class="brand">
-        <div class="logo">
-          <img src="logo.png" alt="A&O Logo">
-        </div>
-        <div class="btext">
-          <b>A&O Bauunternehmen</b>
-          <small>Renovierung · Ausbau · Außenarbeiten</small>
-        </div>
-      </div>
-
-      <nav class="nav">
-        <a class="pill" href="#leistungen">Leistungen</a>
-        <a class="pill" href="#projekte">Projekte</a>
-        <a class="pill" href="#kontakt">Kontakt</a>
-        <a class="pill cta" href="#kontakt">Jetzt anfragen</a>
-      </nav>
-    </div>
+<div class="topbar">
+  <div class="topinner">
+    <div class="logo"><img src="logo.png"></div>
+    <nav class="nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#kontakt" class="cta">Kontakt</a>
+    </nav>
   </div>
+</div>
 
-  <div class="wrap">
+<div class="wrap">
 
-    <!-- HERO -->
-    <section class="section hero" id="start">
-      <div class="herobox">
-        <div class="badge"><span class="dot"></span> Seriös. Sauber. Termintreu. – Bad Kreuznach & deutschlandweit nach Absprache</div>
-
-        <h1>Renovierung & Bauarbeiten – sauber gemacht, starkes Ergebnis.</h1>
-        <p>A&O Bauunternehmen steht für klare Absprachen, saubere Ausführung und ein Ergebnis, das lange hält.</p>
-
-        <!-- kleiner extra text (dein Punkt 4) -->
-        <p class="subline">Kurz & direkt: Schreib uns auf WhatsApp – wir antworten schnell und sagen dir sofort, ob wir dein Projekt annehmen.</p>
-
-        <div class="btnrow">
-          <a class="btn gold" href="https://wa.me/4917684744452?text=Hallo%20A%26O%2C%20ich%20m%C3%B6chte%20ein%20Angebot%20anfragen." target="_blank" rel="noopener">Jetzt per WhatsApp anfragen</a>
-          <a class="btn" href="#leistungen">Leistungen ansehen</a>
-        </div>
-
-        <div class="facts">
-          <div class="fact"><span class="check">✓</span> kostenlose Erstberatung</div>
-          <div class="fact"><span class="check">✓</span> transparent & fair</div>
-          <div class="fact"><span class="check">✓</span> schnelle Termine</div>
-          <div class="fact"><span class="check">✓</span> saubere Arbeit</div>
-        </div>
-      </div>
-
-      <div class="herobox" style="background:var(--card2)">
-        <div class="headrow">
-          <h2 style="margin:0;font-size:26px">Kontakt</h2>
-          <span>Einfach schreiben oder anrufen</span>
-        </div>
-        <div style="margin-top:12px;color:var(--muted);font-weight:800;line-height:1.6">
-          Telefon / WhatsApp: <a href="tel:+4917684744452">0176 84744452</a><br>
-          E-Mail: <a href="mailto:ao.unternehmende@gmail.com">ao.unternehmende@gmail.com</a><br>
-          Standort: Kirchwinkel 7, 55545 Planig<br>
-          Einsatzgebiet: deutschlandweit nach Absprache
-        </div>
-
-        <div class="smallnote">Tipp: Für schnelle Angebote bitte kurz schreiben: Ort · Arbeit · Zeitraum · Fotos.</div>
-      </div>
-    </section>
-
-    <!-- LEISTUNGEN -->
-    <section class="section card" id="leistungen">
-      <div class="cardpad">
-        <div class="headrow">
-          <h2>Leistungen</h2>
-          <span>Professionell, sauber & zuverlässig</span>
-        </div>
-
-        <div class="list">
-          <div class="li"><div class="ico">✓</div> Fliesenlegen (Bad, Küche, Boden)</div>
-          <div class="li"><div class="ico">✓</div> Malerarbeiten & Spachteln</div>
-          <div class="li"><div class="ico">✓</div> Renovierungen & Sanierungen</div>
-          <div class="li"><div class="ico">✓</div> Boden verlegen (Laminat, Vinyl)</div>
-          <div class="li"><div class="ico">✓</div> Außenarbeiten (Terrassen, Pflaster)</div>
-          <div class="li"><div class="ico">✓</div> Fassade / Ausbesserung</div>
-          <div class="li"><div class="ico">✓</div> Baggerarbeiten / Erdarbeiten</div>
-          <div class="li"><div class="ico">✓</div> Kanalanschlüsse / Zuleitungen</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PROJEKTE -->
-    <section class="section" id="projekte">
-      <div class="headrow" style="margin-bottom:6px">
-        <h2 style="margin:0;font-size:34px">Projekte</h2>
-        <span>Tippe auf ein Bild (wird groß)</span>
-      </div>
-
-      <div class="grid">
-        <!-- NICHT DOPPELT: jedes Bild nur 1x -->
-        <div class="proj" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
-          <img src="projekt-angebot.jpg" alt="Angebote & Planung">
-          <div class="cap">
-            <b>Angebote & Planung</b>
-            <small>Schnell, klar & transparent – per WhatsApp anfragen.</small>
-          </div>
-        </div>
-
-        <div class="proj" data-title="Innenausbau" data-src="projekt-innen.jpg">
-          <img src="projekt-innen.jpg" alt="Innenausbau">
-          <div class="cap">
-            <b>Innenausbau</b>
-            <small>Renovierung, Trockenbau & saubere Umsetzung.</small>
-          </div>
-        </div>
-
-        <div class="proj" data-title="Malerarbeiten" data-src="projekt-maler.jpg">
-          <img src="projekt-maler.jpg" alt="Malerarbeiten">
-          <div class="cap">
-            <b>Malerarbeiten</b>
-            <small>Sauber abgeklebt, sauber gestrichen.</small>
-          </div>
-        </div>
-
-        <div class="proj" data-title="Neubau / Außen" data-src="projekt-neubau.jpg">
-          <img src="projekt-neubau.jpg" alt="Neubau Außen">
-          <div class="cap">
-            <b>Neubau / Außen</b>
-            <small>Fassade, Außenbereich, Premium-Finish.</small>
-          </div>
-        </div>
-
-        <div class="proj" data-title="Rohbau / Baustelle" data-src="projekt-rohbau.jpg">
-          <img src="projekt-rohbau.jpg" alt="Rohbau Baustelle">
-          <div class="cap">
-            <b>Rohbau / Baustelle</b>
-            <small>Zuverlässig auf der Baustelle – termintreu & strukturiert.</small>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- GOOGLE MAPS (bleibt drin) -->
-    <section class="section" id="maps">
-      <div class="headrow" style="margin-bottom:10px">
-        <h2 style="margin:0;font-size:28px">Standort</h2>
-        <span>Kirchwinkel 7, 55545 Planig</span>
-      </div>
-
-      <iframe
-        class="map"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        src="https://www.google.com/maps?q=Kirchwinkel%207,%2055545%20Planig&output=embed">
-      </iframe>
-    </section>
-
-    <!-- ANSPRECHPARTNER: nach unten verschoben (dein Punkt 3) -->
-    <section class="section card" id="kontakt">
-      <div class="cardpad">
-        <div class="contactRow">
-          <div class="avatar">
-            <img src="elvis.jpg" alt="Elvis Krasniqi">
-          </div>
-
-          <div class="cText">
-            <h3>Inhaber & Ansprechpartner: Elvis Krasniqi</h3>
-
-            <div class="line">
-              Telefon / WhatsApp: <a href="tel:+4917684744452">0176 84744452</a><br>
-              E-Mail: <a href="mailto:ao.unternehmende@gmail.com">ao.unternehmende@gmail.com</a><br>
-              Standort: Kirchwinkel 7, 55545 Planig<br>
-              Einsatzgebiet: deutschlandweit nach Absprache
-            </div>
-
-            <!-- kleiner Zusatztext (nochmal, aber kurz) -->
-            <div class="smallnote">Je besser die Infos, desto schneller das Angebot: Fotos + Maß/Fläche + Ort.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Footer klein “verpackt” -->
-    <footer>
-      <div>© 2026 A&O Bauunternehmen</div>
-      <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="#kontakt">Impressum</a>
-        <a href="#kontakt">Datenschutz</a>
-      </div>
-    </footer>
-
+<section class="hero">
+  <div class="herobox">
+    <h1>Renovierung & Bauarbeiten – starkes Ergebnis.</h1>
+    <a class="btn" href="https://wa.me/4917684744452">Jetzt per WhatsApp anfragen</a>
   </div>
+  <div class="herobox">Kontakt · Bad Kreuznach · deutschlandweit</div>
+</section>
 
-  <!-- Floating WhatsApp -->
-  <a class="wa" href="https://wa.me/4917684744452?text=Hallo%20A%26O%2C%20ich%20m%C3%B6chte%20ein%20Angebot%20anfragen." target="_blank" rel="noopener">
-    <span class="wac">WA</span>
-    WhatsApp – Angebot
-  </a>
-
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modalbox">
-      <div class="modalhead">
-        <div id="modalTitle">Projekt</div>
-        <button class="close" id="modalClose">Schließen ×</button>
-      </div>
-      <!-- FIX: hier wird das Bild wirklich gesetzt, sonst bleibt es schwarz -->
-      <img class="modalimg" id="modalImg" alt="Projekt groß">
-    </div>
+<section id="leistungen" class="section">
+  <div class="list">
+    <div class="li">Fliesenlegen</div>
+    <div class="li">Malerarbeiten</div>
+    <div class="li">Renovierungen</div>
+    <div class="li">Baggerarbeiten</div>
   </div>
+</section>
 
-  <script>
-    // Projekte → Modal öffnen (Fix für "wird groß aber nicht angezeigt")
-    const modal = document.getElementById('modal');
-    const modalImg = document.getElementById('modalImg');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalClose = document.getElementById('modalClose');
+<section id="projekte" class="section">
+  <div class="grid">
+    <div class="proj" data-src="projekt-angebot.jpg"><img src="projekt-angebot.jpg"><div class="cap">Angebote</div></div>
+    <div class="proj" data-src="projekt-innen.jpg"><img src="projekt-innen.jpg"><div class="cap">Innenausbau</div></div>
+  </div>
+</section>
 
-    document.querySelectorAll('.proj').forEach(card => {
-      card.addEventListener('click', () => {
-        const src = card.getAttribute('data-src');
-        const title = card.getAttribute('data-title') || 'Projekt';
+<section id="kontakt" class="section herobox">
+  <div class="contactRow">
+    <div class="avatar"><img src="elvis.jpg"></div>
+    <div>Elvis Krasniqi · 0176 84744452</div>
+  </div>
+</section>
 
-        modalTitle.textContent = title;
-        modalImg.src = src; // <- wichtig
-        modal.classList.add('show');
-      });
-    });
+</div>
 
-    function closeModal(){
-      modal.classList.remove('show');
-      modalImg.src = ''; // reset
-    }
-    modalClose.addEventListener('click', closeModal);
-    modal.addEventListener('click', (e) => {
-      if(e.target === modal) closeModal();
-    });
-    document.addEventListener('keydown', (e) => {
-      if(e.key === 'Escape') closeModal();
-    });
-  </script>
+<div class="modal" id="modal"><img id="modalImg" class="modalimg"></div>
+
+<script>
+const modal=document.getElementById('modal');
+const modalImg=document.getElementById('modalImg');
+
+document.querySelectorAll('.proj').forEach(p=>{
+ p.onclick=()=>{modalImg.src=p.dataset.src;modal.classList.add('show')}
+});
+modal.onclick=()=>modal.classList.remove('show');
+</script>
+
 </body>
 </html>
