@@ -226,11 +226,6 @@
     .cap b{display:block;font-size:16px}
     .cap small{display:block;color:var(--muted);margin-top:4px;font-weight:700}
 
-    /* ✅ Änderung 1: nur das Stift-Bild verschieben (mehr unten sichtbar) */
-    .proj img.penfix{
-      object-position: center 82%;
-    }
-
     /* Google Maps */
     .map{
       width:100%; height:340px;
@@ -241,15 +236,22 @@
       border:1px solid rgba(17,24,39,.10);
     }
 
-    /* Ansprechpartner card (nur Bild größer, Box nicht aufblasen) */
+    /* Ansprechpartner card (Kasten kleiner + Bild größer) */
+    #kontakt.card{
+      max-width:860px;              /* Kasten kleiner (nicht volle Breite) */
+      margin-left:auto;
+      margin-right:auto;
+    }
+    #kontakt .cardpad{padding:14px;} /* etwas weniger Padding -> kompakter */
+
     .contactRow{
       display:grid;
-      grid-template-columns: 140px 1fr;
+      grid-template-columns: 190px 1fr; /* mehr Platz fürs Bild */
       gap:16px;
       align-items:center;
     }
     .avatar{
-      width:140px;height:140px; /* Basis */
+      width:190px;height:190px;     /* Bild deutlich größer */
       border-radius:26px;
       overflow:hidden;
       border:1px solid rgba(17,24,39,.10);
@@ -278,14 +280,6 @@
       color:#111827;
       font-weight:800;
     }
-
-    /* ✅ Änderung 2: Kontakt-Box bleibt kompakt, aber Avatar wird größer (mehr links genutzt) */
-    .contactCard .cardpad{padding:16px}
-    .contactCard .contactRow{grid-template-columns: 170px 1fr}
-    .contactCard .avatar{width:170px;height:170px}
-    .contactCard .cText h3{font-size:20px;margin-bottom:6px}
-    .contactCard .cText .line{font-size:15px}
-    .contactCard .smallnote{padding:8px 10px;font-size:13px}
 
     /* Floating WhatsApp */
     .wa{
@@ -366,15 +360,20 @@
       .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
       .proj img{height:300px}
+
+      /* Ansprechpartner auf Mobile: kompakt, aber Bild groß */
+      #kontakt.card{max-width:100%;}
+      .contactRow{grid-template-columns: 170px 1fr;}
+      .avatar{width:170px;height:170px;}
     }
     @media (max-width: 520px){
       .brand{min-width:0}
       .btext b{font-size:16px}
       .logo{width:58px;height:58px}
-      .contactRow{grid-template-columns: 120px 1fr}
-      .avatar{width:120px;height:120px}
-      .contactCard .contactRow{grid-template-columns: 140px 1fr}
-      .contactCard .avatar{width:140px;height:140px}
+
+      /* Mobile ganz klein: Bild oben, Text darunter -> wirkt kleiner, Bild bleibt groß */
+      .contactRow{grid-template-columns:1fr; gap:12px;}
+      .avatar{width:180px;height:180px; margin:0 auto;}
       .btn{min-width:170px}
     }
   </style>
@@ -473,8 +472,7 @@
 
       <div class="grid">
         <div class="proj" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
-          <!-- ✅ penfix NUR hier -->
-          <img class="penfix" src="projekt-angebot.jpg" alt="Angebote & Planung">
+          <img src="projekt-angebot.jpg" alt="Angebote & Planung">
           <div class="cap">
             <b>Angebote & Planung</b>
             <small>Schnell, klar & transparent – per WhatsApp anfragen.</small>
@@ -531,7 +529,7 @@
     </section>
 
     <!-- ANSPRECHPARTNER -->
-    <section class="section card contactCard" id="kontakt">
+    <section class="section card" id="kontakt">
       <div class="cardpad">
         <div class="contactRow">
           <div class="avatar">
@@ -582,7 +580,6 @@
   </div>
 
   <script>
-    // Projekte → Modal öffnen
     const modal = document.getElementById('modal');
     const modalImg = document.getElementById('modalImg');
     const modalTitle = document.getElementById('modalTitle');
