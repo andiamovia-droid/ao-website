@@ -213,12 +213,9 @@
       display:block;
       filter:saturate(1.02) contrast(1.02);
       transition:.35s transform;
+      object-position:center 55%;
     }
     .proj:hover img{transform:scale(1.04)}
-
-    /* ✅ FIX 1: Stift im ersten Bild sichtbarer (Ausschnitt nach unten verschoben) */
-    .proj--pen img{ object-position:center 78%; }
-
     .cap{
       position:absolute; left:14px; right:14px; bottom:14px;
       padding:12px 14px;
@@ -230,6 +227,11 @@
     .cap b{display:block;font-size:16px}
     .cap small{display:block;color:var(--muted);margin-top:4px;font-weight:700}
 
+    /* ✅ CHANGE #1: Stift weiter oben sichtbar (nur 1. Projektkarte) */
+    .proj.pen img{
+      object-position:center 78%;
+    }
+
     /* Google Maps */
     .map{
       width:100%; height:340px;
@@ -240,34 +242,37 @@
       border:1px solid rgba(17,24,39,.10);
     }
 
-    /* Ansprechpartner card (Box etwas kompakter, Bild größer) */
-    .contactCard .cardpad{ padding:14px; } /* ✅ FIX 2: Kasten kleiner (weniger Padding) */
-
+    /* Ansprechpartner card (Bild links, Text rechts, “verpackt”) */
     .contactRow{
-      display:grid;
-      grid-template-columns: 160px 1fr; /* ✅ Bild-Spalte größer */
-      gap:14px;                          /* etwas enger */
-      align-items:center;
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
     }
     .avatar{
-      width:160px;height:160px;          /* ✅ Bild größer */
+      width:140px;height:140px;
       border-radius:26px;
       overflow:hidden;
       border:1px solid rgba(17,24,39,.10);
       box-shadow: 0 14px 34px rgba(17,24,39,.14);
       background:rgba(255,255,255,.55);
+      flex:0 0 auto;
     }
-    .avatar img{width:100%;height:100%;object-fit:cover}
+    .avatar img{
+      width:100%;height:100%;
+      object-fit:cover;
+      object-position:center 35%;
+    }
     .cText{
       min-width:0;
       overflow:hidden;
+      flex:1 1 auto;
     }
     .cText h3{margin:0 0 8px;font-size:22px}
     .cText .line{
       color:var(--muted);
       font-weight:700;
       line-height:1.5;
-      word-break:break-word; /* damit nix abgeschnitten wird */
+      word-break:break-word;
     }
     .cText a{color:#0f172a}
     .smallnote{
@@ -278,6 +283,12 @@
       border:1px solid rgba(17,24,39,.10);
       color:#111827;
       font-weight:800;
+      display:inline-block;
+    }
+
+    /* ✅ CHANGE #2: Kontakt-Box wirkt kleiner/verpackter */
+    .contactCard .cardpad{
+      padding:14px;
     }
 
     /* Floating WhatsApp */
@@ -364,12 +375,10 @@
       .brand{min-width:0}
       .btext b{font-size:16px}
       .logo{width:58px;height:58px}
-
-      /* ✅ mobile: Box kompakter, Bild trotzdem größer */
-      .contactRow{grid-template-columns: 150px 1fr; gap:12px}
-      .avatar{width:150px;height:150px}
-
+      .avatar{width:120px;height:120px}
       .btn{min-width:170px}
+      .contactRow{gap:14px}
+      .cText h3{font-size:20px}
     }
   </style>
 </head>
@@ -466,8 +475,8 @@
       </div>
 
       <div class="grid">
-        <!-- ✅ FIX 1: extra class für Stift-Ausschnitt -->
-        <div class="proj proj--pen" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
+        <!-- ✅ Stift-Bild: Klasse "pen" damit NUR dieses Bild nach oben gecrosst wird -->
+        <div class="proj pen" data-title="Angebote & Planung" data-src="projekt-angebot.jpg">
           <img src="projekt-angebot.jpg" alt="Angebote & Planung">
           <div class="cap">
             <b>Angebote & Planung</b>
@@ -509,7 +518,7 @@
       </div>
     </section>
 
-    <!-- GOOGLE MAPS -->
+    <!-- GOOGLE MAPS (bleibt drin) -->
     <section class="section" id="maps">
       <div class="headrow" style="margin-bottom:10px">
         <h2 style="margin:0;font-size:28px">Standort</h2>
@@ -548,7 +557,7 @@
       </div>
     </section>
 
-    <!-- Footer klein -->
+    <!-- Footer klein “verpackt” -->
     <footer>
       <div>© 2026 A&O Bauunternehmen</div>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
